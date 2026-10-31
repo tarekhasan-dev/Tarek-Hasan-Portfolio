@@ -1,0 +1,1381 @@
+/* ========================================
+   NAVBAR THEME
+======================================== */
+
+:root {
+  --brand-orange: #92A9E1;
+  --brand-hover: #7894D5;
+  --brand-light: rgba(146, 169, 225, 0.12);
+  --brand-dark: #111827;
+  --brand-muted: #6b7280;
+
+  --nav-shadow:
+    0 12px 35px rgba(15, 23, 42, 0.07),
+    0 2px 10px rgba(146, 169, 225, 0.08);
+
+  --nav-glass-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.12),
+    0 4px 15px rgba(146, 169, 225, 0.12);
+
+  --cta-shadow:
+    0 10px 25px -5px rgba(146, 169, 225, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 120px;
+}
+
+/* ========================================
+   FIXED NAVBAR HOLDER
+======================================== */
+
+.navbar-header {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+
+  width: 100%;
+  padding: 16px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  transform: translateY(0);
+
+  transition:
+    padding 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* ========================================
+   MAIN GLASS NAVBAR
+======================================== */
+
+.nav-container {
+  position: relative;
+
+  width: 100%;
+  max-width: 1210px;
+
+  min-height: 65px;
+  height: 65px;
+
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+
+  box-shadow: var(--nav-shadow);
+
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  isolation: isolate;
+
+  transition:
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 0.45s ease,
+    min-height 0.4s ease,
+    height 0.4s ease,
+    padding 0.4s ease,
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+.nav-container::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.65),
+    rgba(255, 255, 255, 0.08) 55%,
+    rgba(255, 255, 255, 0.2)
+  );
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nav-container::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.95),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+/* ========================================
+   SCROLL GLASS EFFECT
+======================================== */
+
+.nav-container.nav-scrolled {
+  width: 92%;
+  max-width: 1120px;
+
+  min-height: 58px;
+  height: 58px;
+
+  padding-left: 22px;
+  padding-right: 22px;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  border-color: rgba(255, 255, 255, 0.9);
+
+  box-shadow: var(--nav-glass-shadow);
+
+  backdrop-filter: blur(26px) saturate(190%);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+}
+
+/* ========================================
+   BRAND LOGO
+======================================== */
+
+.brand-logo {
+  position: relative;
+  z-index: 10;
+
+  padding-left: 8px;
+
+  color: var(--brand-dark);
+
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  background: linear-gradient(135deg, #0f172a, #475569);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  transition:
+    letter-spacing 0.3s ease,
+    background 0.3s ease;
+}
+
+.brand-logo:hover {
+  background: linear-gradient(135deg, var(--brand-orange), #7894D5);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  letter-spacing: 0.02em;
+}
+
+/* ========================================
+   DESKTOP NAVIGATION
+======================================== */
+
+.nav-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px 8px;
+}
+
+.nav-link {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    font-weight 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* ========================================
+   SLIDING NAVIGATION PILL
+======================================== */
+
+.sliding-pill {
+  position: absolute;
+
+  top: 4px;
+  left: 8px;
+
+  z-index: 1;
+
+  width: 0;
+  height: 0;
+
+  background: rgba(146, 169, 225, 0.2);
+
+  border-radius: 999px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.3s ease,
+    opacity 0.25s ease;
+}
+
+/* ========================================
+   RIGHT SIDE ACTIONS
+======================================== */
+
+.nav-actions {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ========================================
+   CTA BUTTON
+======================================== */
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 20px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--brand-orange);
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 14px rgba(146, 169, 225, 0.3);
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--brand-hover);
+  box-shadow: var(--cta-shadow);
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: scale(0.96);
+}
+
+.arrow-icon {
+  display: inline-block;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cta-button:hover .arrow-icon {
+  transform: translate(3px, -3px) scale(1.15);
+}
+
+/* ========================================
+   MOBILE HAMBURGER BUTTON
+======================================== */
+
+.mobile-menu-btn {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 8px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #334155;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: var(--brand-light);
+}
+
+.mobile-menu-btn span {
+  display: block;
+
+  width: 19px;
+  height: 2px;
+
+  background: currentColor;
+  border-radius: 5px;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.mobile-menu-btn.menu-open span:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-btn.menu-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.menu-open span:last-child {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========================================
+   MOBILE GLASS DROPDOWN
+======================================== */
+
+.mobile-menu {
+  position: absolute;
+
+  top: calc(100% - 5px);
+  left: 16px;
+  right: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+
+  box-shadow: var(--nav-glass-shadow);
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateY(-12px) scale(0.98);
+  transform-origin: top center;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu.mobile-menu-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateY(0) scale(1);
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 13px 16px;
+
+  border-radius: 16px;
+
+  color: #334155;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  background: rgba(146, 169, 225, 0.16);
+  color: #5878C0;
+
+  transform: translateX(3px);
+}
+
+.mobile-chevron {
+  color: #94a3b8;
+
+  font-size: 22px;
+  line-height: 1;
+}
+
+.mobile-contact-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 18px;
+}
+
+/* ========================================
+   CONTACT MODAL — OVERLAY
+======================================== */
+
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: rgba(15, 23, 42, 0.45);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  animation: contactOverlayIn 0.25s ease-out;
+}
+
+/* ========================================
+   CONTACT MODAL — BOX (দুই কলাম)
+======================================== */
+
+.contact-modal {
+  --contact-blue: #92a9e1;
+  --contact-blue-dark: #5f78b8;
+  --contact-blue-soft: #eef2fb;
+  --contact-blue-border: rgba(146, 169, 225, 0.35);
+
+  position: relative;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+
+  width: 100%;
+  max-width: 800px;
+
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  color: var(--brand-dark);
+
+  border: 1px solid var(--contact-blue-border);
+  border-radius: 26px;
+
+  box-shadow:
+    0 25px 60px rgba(30, 41, 59, 0.2),
+    0 5px 20px rgba(146, 169, 225, 0.12);
+
+  animation: contactModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.contact-modal::-webkit-scrollbar-thumb {
+  background: rgba(146, 169, 225, 0.45);
+  border-radius: 20px;
+}
+
+.contact-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ========================================
+   CLOSE BUTTON
+======================================== */
+
+.contact-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: var(--contact-blue-soft);
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.contact-modal-close:hover {
+  color: #ffffff;
+  background: var(--contact-blue);
+
+  transform: rotate(90deg);
+}
+
+.contact-modal-close:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.contact-modal-close:focus-visible,
+.contact-modal-chip:focus-visible,
+.contact-modal-copy:focus-visible,
+.contact-modal-social a:focus-visible {
+  outline: 2px solid var(--contact-blue-dark);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   LEFT: INFORMATION PANEL
+======================================== */
+
+.contact-modal-aside {
+  display: flex;
+  flex-direction: column;
+
+  padding: 32px 28px;
+
+  background: linear-gradient(160deg, #f4f7fd 0%, #e9eefa 100%);
+  border-right: 1px solid var(--contact-blue-border);
+}
+
+.contact-modal-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: var(--contact-blue-dark);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.contact-modal-aside h2 {
+  margin: 0 0 10px;
+
+  color: #0f172a;
+
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+
+.contact-modal-aside > p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.contact-modal-availability {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 9px;
+
+  margin-top: 18px;
+  padding: 8px 14px;
+
+  border: 1px solid #d9f2e1;
+  border-radius: 999px;
+
+  background: #f0fbf4;
+  color: #166534;
+
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.contact-modal-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+
+  border-radius: 50%;
+  background: #22c55e;
+
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+
+  animation: contactDotPulse 1.8s infinite;
+}
+
+.contact-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin: 18px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.contact-modal-meta li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(146, 169, 225, 0.25);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.contact-modal-meta-icon {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+
+  border-radius: 10px;
+
+  background: var(--contact-blue-soft);
+  color: var(--contact-blue-dark);
+}
+
+.contact-modal-meta-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-modal-meta-text small {
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.contact-modal-meta-text strong {
+  color: #334155;
+
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+.contact-modal-copy {
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+
+  border: 1px solid #dce4f2;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.contact-modal-copy:hover {
+  border-color: var(--contact-blue);
+  color: var(--contact-blue-dark);
+}
+
+.contact-modal-copy.is-copied {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.contact-modal-social {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.contact-modal-social > span {
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.contact-modal-social > div {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+.contact-modal-social a {
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #475569;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.contact-modal-social a:hover {
+  background: var(--contact-blue);
+  color: #ffffff;
+
+  transform: translateY(-3px);
+}
+
+/* ========================================
+   RIGHT: FORM PANEL
+======================================== */
+
+.contact-modal-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  padding: 46px 32px 24px;
+}
+
+.contact-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-modal-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.contact-modal-form label,
+.contact-modal-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #475569;
+
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.contact-modal-form label svg,
+.contact-modal-label svg {
+  flex-shrink: 0;
+  color: var(--contact-blue);
+}
+
+/* Input and textarea */
+
+.contact-modal-form input,
+.contact-modal-form textarea {
+  display: block;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 11px 13px;
+
+  border: 1px solid #dce4f2;
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #f8fafc;
+  color: #334155;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.contact-modal-form input {
+  min-height: 44px;
+}
+
+.contact-modal-form textarea {
+  min-height: 92px;
+  max-height: 200px;
+
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.contact-modal-form input::placeholder,
+.contact-modal-form textarea::placeholder {
+  color: #94a3b8;
+}
+
+.contact-modal-form input:focus,
+.contact-modal-form textarea:focus {
+  border-color: var(--contact-blue);
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(146, 169, 225, 0.16);
+}
+
+/* Project type chips */
+
+.contact-modal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.contact-modal-chip {
+  padding: 8px 14px;
+
+  border: 1px solid #dce4f2;
+  border-radius: 999px;
+
+  background: #f8fafc;
+  color: #475569;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-modal-chip:hover {
+  border-color: var(--contact-blue);
+  color: var(--contact-blue-dark);
+}
+
+.contact-modal-chip.is-active {
+  border-color: var(--contact-blue);
+  background: var(--contact-blue);
+  color: #ffffff;
+}
+
+.contact-modal-chip:active {
+  transform: scale(0.96);
+}
+
+/* Character counter */
+
+.contact-modal-counter {
+  align-self: flex-end;
+
+  margin-top: -2px;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.contact-modal-counter.is-warn {
+  color: #e11d48;
+}
+
+/* ========================================
+   SUBMIT BUTTON
+======================================== */
+
+.contact-modal-submit {
+  width: 100%;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 2px;
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--brand-orange);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(146, 169, 225, 0.3);
+
+  transition: all 0.3s ease;
+}
+
+.contact-modal-submit:hover {
+  background: var(--brand-hover);
+
+  box-shadow: 0 12px 25px rgba(146, 169, 225, 0.38);
+
+  transform: translateY(-2px);
+}
+
+.contact-modal-submit:active {
+  transform: scale(0.98);
+}
+
+.contact-modal-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.contact-modal-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  margin: -2px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ========================================
+   FORM ERROR
+======================================== */
+
+.contact-form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+
+  margin: 0;
+  padding: 10px 12px;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  background: #fef2f2;
+  color: #dc2626;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.contact-form-error svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ========================================
+   SUCCESS MESSAGE
+======================================== */
+
+.contact-modal-success {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  min-height: 300px;
+  padding: 10px 5px;
+
+  text-align: center;
+}
+
+.contact-modal-success > svg {
+  width: 58px;
+  height: 58px;
+
+  padding: 14px;
+
+  border-radius: 18px;
+
+  background: var(--contact-blue-soft);
+  color: var(--contact-blue);
+}
+
+.contact-modal-success h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.contact-modal-success p {
+  max-width: 300px;
+  margin: 0 0 10px;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.contact-modal-success .cta-button {
+  min-width: 120px;
+}
+
+/* ========================================
+   MODAL ANIMATIONS
+======================================== */
+
+@keyframes contactOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contactModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes contactDotPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(1.35);
+  }
+}
+
+/* ========================================
+   MODAL RESPONSIVE
+======================================== */
+
+@media (max-width: 760px) {
+  .contact-modal-overlay {
+    padding: 14px;
+  }
+
+  .contact-modal {
+    grid-template-columns: minmax(0, 1fr);
+
+    max-width: 460px;
+
+    max-height: calc(100vh - 28px);
+    max-height: calc(100dvh - 28px);
+
+    border-radius: 22px;
+  }
+
+  .contact-modal .contact-modal-hide-sm {
+    display: none;
+  }
+
+  .contact-modal-aside {
+    padding: 26px 22px 20px;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--contact-blue-border);
+  }
+
+  .contact-modal-aside h2 {
+    padding-right: 34px;
+
+    font-size: 22px;
+  }
+
+  .contact-modal-meta {
+    margin-top: 14px;
+  }
+
+  .contact-modal-main {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-modal-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ========================================
+   RESPONSIVE NAVBAR
+======================================== */
+
+@media (max-width: 900px) {
+  .nav-container {
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 18px;
+  }
+
+  .nav-link {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 13px;
+  }
+
+  .brand-logo {
+    font-size: 21px;
+  }
+
+  .cta-button {
+    padding: 9px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-header {
+    top: 10px;
+    padding: 12px 16px;
+  }
+
+  .nav-container {
+    min-height: 58px;
+    height: 58px;
+
+    padding: 0 14px 0 20px;
+  }
+
+  .nav-container.nav-scrolled {
+    width: 92%;
+    min-height: 54px;
+    height: 54px;
+  }
+
+  .nav-wrapper {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .brand-logo {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-header {
+    padding: 10px 12px;
+  }
+
+  .nav-container {
+    padding: 0 10px 0 16px;
+  }
+
+  .brand-logo {
+    font-size: 19px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .cta-button {
+    padding: 9px 13px;
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  .mobile-menu {
+    left: 12px;
+    right: 12px;
+  }
+
+  .contact-modal-main {
+    padding: 20px 18px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-header,
+  .nav-container,
+  .brand-logo,
+  .nav-link,
+  .sliding-pill,
+  .cta-button,
+  .arrow-icon,
+  .mobile-menu-btn,
+  .mobile-menu-btn span,
+  .mobile-menu,
+  .mobile-nav-link,
+  .contact-modal-overlay,
+  .contact-modal,
+  .contact-modal-close,
+  .contact-modal-chip,
+  .contact-modal-copy,
+  .contact-modal-social a,
+  .contact-modal-dot,
+  .contact-modal-submit {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

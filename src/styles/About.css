@@ -1,0 +1,1221 @@
+/* =====================================================
+   ABOUT SECTION
+===================================================== */
+
+.abt-section {
+  --abt-accent: #f05a28;
+  --abt-accent-ink: #d84a1b;
+  --abt-soft: #fff0e9;
+  --abt-ink: #1c2430;
+  --abt-muted: #667085;
+  --abt-line: #eceef2;
+
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 1210px;
+  margin: -16px auto 60px;
+  padding: 90px 56px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 28px;
+ /* background: #efeded; */
+  color: var(--abt-ink);
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+}
+
+.abt-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 64px;
+}
+
+/* ---------- Left card ---------- */
+
+.abt-card {
+  position: relative;
+  padding: 36px;
+  border: 1px solid rgba(240, 90, 40, 0.3);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(28, 36, 48, 0.06);
+}
+
+.abt-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.abt-card-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--abt-soft);
+  color: var(--abt-accent);
+}
+
+.abt-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.abt-card-heading h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.abt-card p {
+  margin: 0 0 16px;
+  color: var(--abt-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.abt-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 8px 8px 8px 24px;
+  border-radius: 999px;
+  background: var(--abt-accent-ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.abt-cta b {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 17px;
+}
+
+.abt-cta:hover {
+  background: var(--abt-ink);
+  transform: translateY(-2px);
+}
+
+.abt-card-corner {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid var(--abt-accent);
+  border-bottom: 2px solid var(--abt-accent);
+  border-bottom-right-radius: 6px;
+  pointer-events: none;
+}
+
+/* ---------- Right side ---------- */
+
+.abt-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--abt-muted);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.abt-label i {
+  display: block;
+  width: 70px;
+  height: 1px;
+  margin-left: 6px;
+  background: var(--abt-line);
+}
+
+.abt-right h2 {
+  margin: 18px 0 16px;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.abt-name {
+  display: block;
+  color: var(--abt-accent-ink);
+}
+
+.abt-tagline {
+  max-width: 46ch;
+  margin: 0 0 30px;
+  color: var(--abt-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.abt-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.abt-highlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--abt-line);
+  border-radius: 14px;
+  background: #fff;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.abt-highlight:hover {
+  border-color: var(--abt-accent);
+  box-shadow: 0 8px 20px rgba(240, 90, 40, 0.1);
+  transform: translateY(-3px);
+}
+
+.abt-highlight-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--abt-soft);
+  color: var(--abt-accent);
+}
+
+.abt-highlight-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.abt-highlight > span {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.abt-decoration {
+  margin-top: 28px;
+}
+
+.abt-decoration span {
+  display: block;
+  width: 48px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--abt-accent);
+}
+
+/* =====================================================
+   ABOUT — ANIMATED BACKGROUND
+===================================================== */
+
+.abt-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.abt-bg > span {
+  position: absolute;
+  display: block;
+}
+
+/* ---------- Orbits ---------- */
+
+.abt-orbit {
+  border-radius: 50%;
+}
+
+.abt-orbit-1 {
+  top: 12%;
+  left: 8%;
+  width: 84%;
+  height: 76%;
+  border: 1px solid rgba(240, 90, 40, 0.22);
+  transform: rotate(-25deg);
+  animation: abtOrbitSpin 22s linear infinite;
+}
+
+.abt-orbit-2 {
+  top: 4%;
+  left: 16%;
+  width: 68%;
+  height: 92%;
+  border: 1px dashed rgba(240, 90, 40, 0.18);
+  transform: rotate(35deg);
+  animation: abtOrbitSpinReverse 30s linear infinite;
+}
+
+/* ---------- Cube ---------- */
+
+.abt-cube {
+  top: 8%;
+  right: 7%;
+  width: 150px;
+  height: 150px;
+  border: 2px solid rgba(240, 90, 40, 0.3);
+  border-radius: 24px;
+  transform: rotate(35deg);
+  animation: abtCubeFloat 8s ease-in-out infinite;
+}
+
+/* ---------- Glow orbs ---------- */
+
+.abt-orb {
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.5;
+}
+
+.abt-orb-1 {
+  top: 6%;
+  left: 3%;
+  width: 220px;
+  height: 220px;
+  background: rgba(240, 90, 40, 0.3);
+  animation: abtOrbFloat 7s ease-in-out infinite;
+}
+
+.abt-orb-2 {
+  right: 4%;
+  bottom: 6%;
+  width: 190px;
+  height: 190px;
+  background: rgba(255, 145, 77, 0.28);
+  animation: abtOrbFloat 9s ease-in-out infinite reverse;
+}
+
+/* ---------- Dot grids ---------- */
+
+.abt-dots {
+  width: 170px;
+  height: 170px;
+  background-image: radial-gradient(
+    rgba(240, 90, 40, 0.45) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 17px 17px;
+  opacity: 0.45;
+  animation: abtDotsFloat 7s ease-in-out infinite;
+}
+
+.abt-dots-1 {
+  top: 3%;
+  right: 30%;
+}
+
+.abt-dots-2 {
+  bottom: 3%;
+  left: 2%;
+}
+
+/* ---------- Triangles ---------- */
+
+.abt-tri {
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(240, 90, 40, 0.5);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: abtTriFloat 6s ease-in-out infinite;
+}
+
+.abt-tri-1 {
+  top: 10%;
+  left: 40%;
+}
+
+.abt-tri-2 {
+  right: 22%;
+  bottom: 9%;
+  animation-delay: 1.5s;
+}
+
+/* ---------- Tech symbols ---------- */
+
+.abt-bg > .abt-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(240, 90, 40, 0.2);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--abt-accent);
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  animation: abtSymbolFloat 5s ease-in-out infinite;
+}
+
+.abt-symbol-1 {
+  top: 6%;
+  left: 52%;
+}
+
+.abt-symbol-2 {
+  right: 3%;
+  bottom: 28%;
+  animation-delay: 1s;
+}
+
+.abt-symbol-3 {
+  bottom: 5%;
+  left: 45%;
+  animation-delay: 2s;
+}
+
+/* ---------- Particles ---------- */
+
+.abt-particle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--abt-accent);
+  box-shadow: 0 0 15px rgba(240, 90, 40, 0.7);
+  animation: abtParticlePulse 3s ease-in-out infinite;
+}
+
+.abt-particle-1 {
+  top: 18%;
+  left: 30%;
+}
+
+.abt-particle-2 {
+  right: 18%;
+  bottom: 22%;
+  animation-delay: 1s;
+}
+
+.abt-particle-3 {
+  top: 62%;
+  left: 4%;
+  animation-delay: 2s;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes abtOrbitSpin {
+  from {
+    transform: rotate(-25deg);
+  }
+  to {
+    transform: rotate(335deg);
+  }
+}
+
+@keyframes abtOrbitSpinReverse {
+  from {
+    transform: rotate(35deg);
+  }
+  to {
+    transform: rotate(-325deg);
+  }
+}
+
+@keyframes abtCubeFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(35deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(55deg);
+  }
+}
+
+@keyframes abtOrbFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -25px);
+  }
+}
+
+@keyframes abtDotsFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes abtTriFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(15deg);
+  }
+}
+
+@keyframes abtSymbolFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(8deg);
+  }
+}
+
+@keyframes abtParticlePulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .abt-section {
+    margin: 10px auto 40px;
+    padding: 56px 32px;
+  }
+
+  .abt-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .abt-right {
+    order: -1;
+  }
+
+  .abt-cube {
+    width: 100px;
+    height: 100px;
+  }
+
+  .abt-dots {
+    width: 110px;
+    height: 110px;
+  }
+
+  .abt-bg > .abt-symbol {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .abt-section {
+    padding: 40px 18px;
+    border-radius: 20px;
+  }
+
+  .abt-card {
+    padding: 26px 22px;
+  }
+
+  .abt-highlights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* ছোট স্ক্রিনে ভারী অ্যানিমেশন লুকানো */
+  .abt-bg > .abt-symbol,
+  .abt-tri,
+  .abt-cube {
+    display: none;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-bg > span {
+    animation: none !important;
+  }
+
+  .abt-cta,
+  .abt-highlight {
+    transition: none;
+  }
+
+  .abt-cta:hover,
+  .abt-highlight:hover {
+    transform: none;
+  }
+}
+
+.abt-right h2 {
+  margin: 0 0 30px;
+}
+
+/* ABOUT CARD — FLOATING GRAPHICAL ANIMATION */
+
+.abt-card {
+  animation: abtCardFloat 6s ease-in-out infinite;
+  box-shadow:
+    0 15px 35px rgba(240, 90, 40, 0.08),
+    0 0 25px rgba(240, 90, 40, 0.05);
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.abt-card:hover {
+  border-color: rgba(240, 90, 40, 0.55);
+  box-shadow:
+    0 20px 45px rgba(240, 90, 40, 0.14),
+    0 0 35px rgba(240, 90, 40, 0.08);
+}
+
+@keyframes abtCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-card {
+    animation: none;
+  }
+}
+
+
+/* ABOUT SECTION - BLUE ACCENT THEME */
+
+.abt-section {
+  --abt-accent: #92A9E1;
+  --abt-accent-ink: #718BCB;
+  --abt-soft: #DCE5F7;
+  --abt-line: rgba(146, 169, 225, 0.35);
+}
+
+/* Card */
+.abt-card {
+  border-color: rgba(146, 169, 225, 0.5);
+}
+
+.abt-card:hover {
+  border-color: #92A9E1;
+}
+
+/* Icons and buttons */
+.abt-card-icon,
+.abt-highlight-icon {
+  background: #DCE5F7;
+  color: #718BCB;
+}
+
+.abt-cta {
+  background: #718BCB;
+}
+
+.abt-cta:hover {
+  background: #526FAF;
+}
+
+/* Text accents */
+.abt-name {
+  color: #718BCB;
+}
+
+/* Highlight cards */
+.abt-highlight {
+  border-color: rgba(146, 169, 225, 0.35);
+}
+
+.abt-highlight:hover {
+  border-color: #92A9E1;
+  box-shadow: 0 8px 20px rgba(146, 169, 225, 0.2);
+}
+
+/* Decorative line */
+.abt-decoration span {
+  background: #92A9E1;
+}
+
+/* Animated background */
+.abt-orbit-1 {
+  border-color: rgba(146, 169, 225, 0.45);
+}
+
+.abt-orbit-2 {
+  border-color: rgba(146, 169, 225, 0.35);
+}
+
+.abt-cube {
+  border-color: rgba(146, 169, 225, 0.55);
+}
+
+/* Glow orbs */
+.abt-orb-1 {
+  background: rgba(146, 169, 225, 0.4);
+}
+
+.abt-orb-2 {
+  background: rgba(113, 139, 203, 0.35);
+}
+
+/* Dot grids */
+.abt-dots {
+  background-image: radial-gradient(
+    rgba(113, 139, 203, 0.65) 1.5px,
+    transparent 1.5px
+  );
+}
+
+/* Triangles */
+.abt-tri {
+  border-color: rgba(146, 169, 225, 0.65);
+}
+
+/* Tech symbols */
+.abt-bg > .abt-symbol {
+  border-color: rgba(146, 169, 225, 0.4);
+  color: #718BCB;
+}
+
+/* Particles */
+.abt-particle {
+  background: #92A9E1;
+  box-shadow: 0 0 15px rgba(146, 169, 225, 0.9);
+}
+
+/* Floating card shadow */
+.abt-card {
+  box-shadow:
+    0 15px 35px rgba(113, 139, 203, 0.16),
+    0 0 25px rgba(146, 169, 225, 0.12);
+}
+
+.abt-card:hover {
+  box-shadow:
+    0 20px 45px rgba(113, 139, 203, 0.25),
+    0 0 35px rgba(146, 169, 225, 0.18);
+}
+
+
+/* Make About Card Smaller */
+.abt-card {
+  max-width: 480px;
+  width: 100%;
+  justify-self: center;
+  padding: 26px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .abt-card {
+    padding: 22px 18px;
+  }
+}
+
+.abt-right h2 {
+  color: hsl(0, 1%, 22%);
+}
+
+/* About Card Sparkle Icon */
+.abt-card-heading .abt-card-icon {
+  background-color: #97cbe1 !important;
+  color: #ffffff !important;
+}
+
+.abt-card-heading .abt-card-icon svg {
+  stroke: #ffffff !important;
+}
+
+/* HIGHLIGHT CARD CONTENT */
+
+.abt-highlight-content {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.abt-highlight-content h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  transition: color 0.3s ease;
+}
+
+.abt-highlight-content p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ICON BADGE */
+
+.abt-highlight-badge {
+  font-family: monospace;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ARROW INDICATOR */
+
+.abt-highlight-arrow {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  font-size: 17px;
+  color: #cbd5e1;
+  transition: all 0.3s ease;
+}
+
+/* EXISTING CARD HOVER */
+
+.abt-highlight:hover .abt-highlight-content h3 {
+  color: #2563eb;
+}
+
+.abt-highlight:hover .abt-highlight-arrow {
+  color: #2563eb;
+  transform: translate(3px, -3px);
+}
+
+
+/* FEATURE CARD BUTTON RESET */
+.abt-highlight {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* FEATURE MODAL OVERLAY */
+.abt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: abtFadeIn 0.25s ease;
+}
+
+/* MODAL BOX */
+.abt-modal {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+  border: 1px solid rgba(146, 169, 225, 0.3);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+  animation: abtModalIn 0.3s ease;
+}
+
+/* CLOSE BUTTON */
+.abt-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 17px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 25px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.abt-modal-close:hover {
+  background: #e2e8f0;
+  transform: rotate(90deg);
+}
+
+/* MODAL ICON */
+.abt-modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.abt-modal-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.abt-modal h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.abt-modal-subtitle {
+  margin: 7px 0 18px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.abt-modal-description {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.abt-modal-divider {
+  height: 1px;
+  margin: 22px 0;
+  background: #e2e8f0;
+}
+
+.abt-modal h4 {
+  margin: 0 0 14px;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.abt-modal-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.abt-modal-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #475569;
+  font-size: 13px;
+}
+
+.abt-modal-list li span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.abt-modal-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.abt-modal-done:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+@keyframes abtFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes abtModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .abt-modal {
+    padding: 25px 20px;
+  }
+
+  .abt-modal h3 {
+    font-size: 22px;
+  }
+}
+
+/* =========================================
+   FIX: MODAL SKILLS SECTION ER UPORE ASHBE
+========================================= */
+
+.abt-section:has(.abt-modal-overlay) {
+  z-index: 9999;
+}
+
+/* =========================================
+   ABOUT MODAL: SAME DESIGN AS SKILL MODAL
+========================================= */
+
+.abt-modal-overlay {
+  z-index: 9999;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.abt-modal {
+  --coral: #ff7f6e;
+  --coral-dark: #e8604e;
+  --coral-soft: #fff1ee;
+  --coral-border: rgba(255, 127, 110, 0.35);
+
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 16px;
+  align-content: start;
+
+  max-width: 440px;
+  max-height: 90vh;
+  padding: 30px;
+  border: 1px solid var(--coral-border);
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(30, 41, 59, 0.2);
+  animation: abtModalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* sob content pura width e (icon, label, title chhara) */
+.abt-modal > * {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Close button ---------- */
+
+.abt-modal-close {
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 22px;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.abt-modal-close:hover {
+  color: #475569;
+  background: #f1f5f9;
+  transform: none;
+}
+
+/* ---------- Icon + label + title (ek line e) ---------- */
+
+.abt-modal > .abt-modal-icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+
+  width: 56px;
+  height: 56px;
+  margin: 0 0 20px;
+  border: none;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #ff9a8b, var(--coral-dark));
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(255, 127, 110, 0.35);
+}
+
+.abt-modal > .abt-modal-label {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+
+  margin: 0;
+  padding-right: 40px;
+  color: var(--coral-dark);
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.abt-modal > h3 {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+
+  margin: 5px 0 20px;
+  padding-right: 40px;
+  color: #0f172a;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+/* ---------- Subtitle + description ---------- */
+
+.abt-modal-subtitle {
+  margin: 0 0 10px;
+  color: var(--coral-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.abt-modal-description {
+  margin: 0 0 22px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ---------- Divider + heading ---------- */
+
+.abt-modal-divider {
+  height: 1px;
+  margin: 0 0 18px;
+  background: #f1f5f9;
+}
+
+.abt-modal h4 {
+  margin: 0 0 12px;
+  color: var(--coral-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ---------- Focus list = tag style ---------- */
+
+.abt-modal-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.abt-modal-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  border: 1px solid var(--coral-border);
+  border-radius: 11px;
+  background: var(--coral-soft);
+  color: var(--coral-dark);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.abt-modal-list li span {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  color: var(--coral);
+  font-size: 12px;
+}
+
+/* ---------- Done button ---------- */
+
+.abt-modal-done {
+  margin-top: 22px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff9a8b, var(--coral-dark));
+  box-shadow: 0 8px 20px rgba(255, 127, 110, 0.3);
+}
+
+.abt-modal-done:hover {
+  background: linear-gradient(135deg, #ff8a79, #d9503e);
+  transform: translateY(-2px);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 480px) {
+  .abt-modal {
+    padding: 25px 20px;
+  }
+
+  .abt-modal > h3 {
+    font-size: 22px;
+  }
+}
+
+.abt-modal-overlay {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+}

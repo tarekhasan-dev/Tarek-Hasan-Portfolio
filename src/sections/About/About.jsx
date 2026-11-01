@@ -1,6 +1,7 @@
+
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import "../styles/About.css";
+import "./About.css";
 
 const features = [
   {
@@ -177,7 +178,7 @@ function About() {
         </div>
       </div>
 
-      {/* FEATURE DETAILS MODAL (portal: body-te render hoy) */}
+      {/* FEATURE DETAILS MODAL */}
       {activeFeature &&
         createPortal(
           <div

@@ -1,17 +1,17 @@
-
 import {
   FaHtml5,
   FaCss3Alt,
   FaJs,
   FaDesktop,
   FaReact,
-  FaWind,
   FaCode,
   FaLayerGroup,
 } from "react-icons/fa";
+
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { Link, useParams } from "react-router-dom";
-import "../App.css";
+
+import "./ProjectDetails.css";
 
 const projectData = {
   "project-one": {
@@ -96,6 +96,7 @@ function DevconfShowcase({ project }) {
       <div className="devconf-showcase-top">
         <div className="devconf-brand">
           <span className="devconf-brand-mark">D</span>
+
           <span>
             DEVCONF <b>/ 2026</b>
           </span>
@@ -112,6 +113,7 @@ function DevconfShowcase({ project }) {
 
         <div className="devconf-floating-label devconf-label-left">
           <span className="devconf-live-dot" />
+
           <div>
             <strong>Interactive preview</strong>
             <small>CSS-built showcase</small>
@@ -182,6 +184,7 @@ function DevconfShowcase({ project }) {
                   <div className="devconf-mock-circle devconf-circle-two" />
                   <div className="devconf-mock-cross">+</div>
                   <div className="devconf-mock-year">2026</div>
+
                   <div className="devconf-mock-side-text">
                     INNOVATE / BUILD / REPEAT
                   </div>
@@ -213,7 +216,6 @@ function DevconfShowcase({ project }) {
         <div className="devconf-floating-label devconf-label-right">
           <strong>Design / Build / Iterate</strong>
           <small>Web experience · 2026</small>
-
           <br />
         </div>
       </div>
@@ -231,6 +233,7 @@ function DevconfShowcase({ project }) {
 
 function ProjectDetails() {
   const { projectId } = useParams();
+
   const project = projectData[projectId];
   const isDevconf = projectId === "project-four";
 
@@ -238,6 +241,7 @@ function ProjectDetails() {
     return (
       <main className="project-not-found">
         <h1>Project not found.</h1>
+
         <Link to="/">← Back to Home</Link>
       </main>
     );
@@ -254,9 +258,13 @@ function ProjectDetails() {
       </Link>
 
       <header className="project-detail-header">
-        <p className="eyebrow">PROJECT / {project.number}</p>
+        <p className="eyebrow">
+          PROJECT / {project.number}
+        </p>
 
-        <p className="project-category">{project.category}</p>
+        <p className="project-category">
+          {project.category}
+        </p>
 
         <h1>{project.title}</h1>
 
@@ -292,6 +300,7 @@ function ProjectDetails() {
       ) : (
         <section className="project-detail-preview">
           <span>{project.title}</span>
+
           <span className="project-detail-number">
             {project.number}
           </span>
@@ -301,12 +310,15 @@ function ProjectDetails() {
       <section className="project-detail-content">
         <div className="detail-block">
           <p className="eyebrow">01 / OVERVIEW</p>
+
           <h2>About the project</h2>
+
           <p>{project.description}</p>
         </div>
 
         <div className="detail-block">
           <p className="eyebrow">02 / TECHNOLOGY</p>
+
           <h2>Tech stack</h2>
 
           <div
@@ -340,13 +352,17 @@ function ProjectDetails() {
 
         <div className="detail-block">
           <p className="eyebrow">03 / CHALLENGES</p>
+
           <h2>Challenges &amp; approach</h2>
+
           <p>{project.challenges}</p>
         </div>
 
         <div className="detail-block">
           <p className="eyebrow">04 / WHAT'S NEXT</p>
+
           <h2>Future improvements</h2>
+
           <p>{project.futurePlans}</p>
         </div>
       </section>
@@ -363,15 +379,31 @@ function ProjectDetails() {
             </h2>
 
             <p>
-            Every detail is shaped with purpose, from the visual rhythm to the smallest interaction. A carefully considered interface brings clarity, character, and technical craftsmanship together in a cohesive digital experience.
+              Every detail is shaped with purpose, from the
+              visual rhythm to the smallest interaction. A
+              carefully considered interface brings clarity,
+              character, and technical craftsmanship together
+              in a cohesive digital experience.
             </p>
           </div>
 
           <div className="devconf-process-steps">
             {[
-              ["01", "Design", "Build a clear visual hierarchy."],
-              ["02", "Develop", "Create responsive page sections."],
-              ["03", "Refine", "Polish details and interactions."],
+              [
+                "01",
+                "Design",
+                "Build a clear visual hierarchy.",
+              ],
+              [
+                "02",
+                "Develop",
+                "Create responsive page sections.",
+              ],
+              [
+                "03",
+                "Refine",
+                "Polish details and interactions.",
+              ],
             ].map(([number, title, description]) => (
               <article key={number}>
                 <span>{number}</span>
@@ -389,6 +421,7 @@ function ProjectDetails() {
       <section className="project-detail-contact">
         <div>
           <p className="eyebrow">HAVE A QUESTION?</p>
+
           <h2>Want to know more?</h2>
         </div>
 

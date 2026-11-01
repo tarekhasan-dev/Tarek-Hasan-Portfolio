@@ -1,0 +1,781 @@
+/* ==========================================================
+   Education & Experience section (git-graph style)
+   All classes are prefixed with "jr-" so nothing leaks into
+   the rest of the portfolio.
+   ========================================================== */
+
+.journey {
+  --j-surface: #ffffff;
+  --j-ink: #12132b;
+  --j-muted: #6b6f8e;
+  --j-line: #e6e8f6;
+  --j-chip: #f1f2fc;
+  --j-blue: #7b8df2;
+  --j-violet: #8b5cf6;
+  --j-gray: #a3a8c8;
+  --j-green: #22a06b;
+  --j-term: #12132b;
+  --j-term-ink: #d9ddff;
+  --j-shadow: 0 10px 30px -14px rgba(90, 100, 200, 0.28);
+  --j-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* graph geometry */
+  --x0: 15px;
+  --x1: 45px;
+  --x2: 75px;
+  --gw: 100px;
+  --ny: 40px;
+
+  position: relative;
+  padding: 96px 24px 110px;
+  color: var(--j-ink);
+  background: transparent;
+
+  /* keep every animation inside this section */
+  overflow: hidden;
+  contain: paint;
+  isolation: isolate;
+}
+
+.journey *,
+.journey *::before,
+.journey *::after {
+  box-sizing: border-box;
+}
+
+.jr-inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1210px);
+  margin: 0 auto;
+}
+
+.journey :focus-visible {
+  outline: 3px solid var(--j-blue);
+  outline-offset: 2px;
+}
+
+/* ---------- heading ---------- */
+.jr-label {
+  font: 500 0.72rem var(--j-mono);
+  letter-spacing: 0.08em;
+  color: var(--j-muted);
+  margin-bottom: 10px;
+}
+
+.jr-title {
+  font-size: clamp(2.1rem, 6vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 28px;
+  color: var(--j-ink);
+}
+
+.jr-title em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--j-blue), var(--j-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- toolbar ---------- */
+.jr-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.jr-term {
+  background: var(--j-term);
+  color: var(--j-term-ink);
+  font: 400 0.8rem var(--j-mono);
+  padding: 9px 14px;
+  border-radius: 12px;
+}
+
+.jr-term b {
+  color: var(--j-blue);
+  font-weight: 500;
+}
+
+.jr-seg {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--j-chip);
+  border-radius: 14px;
+}
+
+.jr-seg button {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 0;
+  background: none;
+  color: var(--j-muted);
+  padding: 8px 14px;
+  min-height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.jr-seg button[aria-pressed='true'] {
+  background: var(--j-surface);
+  color: var(--j-ink);
+  box-shadow: 0 2px 8px -2px rgba(80, 90, 190, 0.3);
+}
+
+/* ---------- list + rows ---------- */
+.jr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jr-row {
+  display: flex;
+  padding-bottom: 18px;
+  transition: opacity 0.25s;
+}
+
+.jr-row.is-dim {
+  opacity: 0.3;
+}
+
+/* ---------- git graph ---------- */
+.jr-graph {
+  position: relative;
+  width: var(--gw);
+  flex: none;
+}
+
+.jr-graph i {
+  position: absolute;
+  display: block;
+}
+
+.jr-v { width: 2px; }
+.jr-l0 { left: var(--x0); background: var(--j-blue); }
+.jr-l1 { left: var(--x1); background: var(--j-violet); }
+.jr-l2 { left: var(--x2); background: var(--j-gray); }
+
+.jr-full { top: 0; bottom: 0; }
+.jr-top { top: 0; height: var(--ny); }
+.jr-low { top: var(--ny); bottom: 0; }
+
+.jr-dash {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--j-violet) 0 6px,
+    transparent 6px 11px
+  ) !important;
+}
+
+.jr-merge {
+  left: calc(var(--x0) + 1px);
+  width: calc(var(--x2) - var(--x0) + 2px);
+  top: var(--ny);
+  bottom: 0;
+  border-top: 2px solid var(--j-gray);
+  border-right: 2px solid var(--j-gray);
+  border-top-right-radius: 16px;
+}
+
+.jr-fork {
+  left: calc(var(--x0) + 1px);
+  width: calc(var(--x1) - var(--x0) + 2px);
+  top: 0;
+  height: calc(var(--ny) + 2px);
+  border-bottom: 2px solid var(--j-violet);
+  border-right: 2px solid var(--j-violet);
+  border-bottom-right-radius: 16px;
+}
+
+.jr-node {
+  width: 30px;
+  height: 30px;
+  top: calc(var(--ny) - 15px);
+  display: grid !important;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--j-surface);
+  border: 2px solid;
+}
+
+.jr-node svg { width: 15px; height: 15px; }
+
+.jr-n0 { left: calc(var(--x0) - 14px); border-color: var(--j-blue); color: var(--j-blue); }
+.jr-n1 { left: calc(var(--x1) - 14px); border-color: var(--j-violet); color: var(--j-violet); }
+.jr-n2 { left: calc(var(--x2) - 14px); border-color: var(--j-gray); color: var(--j-gray); }
+
+.jr-head {
+  background: var(--j-blue);
+  color: #fff;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--j-blue) 22%, transparent);
+}
+
+/* ---------- card ---------- */
+.jr-card {
+  flex: 1;
+  min-width: 0;
+  background: var(--j-surface);
+  border: 1px solid var(--j-line);
+  border-radius: 22px;
+  box-shadow: var(--j-shadow);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.jr-card:has(.jr-hd[aria-expanded='true']) {
+  border-color: color-mix(in srgb, var(--j-blue) 55%, var(--j-line));
+}
+
+.jr-hd {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 18px 20px 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.jr-hd:focus-visible {
+  outline: 3px solid var(--j-blue);
+  outline-offset: -3px;
+  border-radius: 22px;
+}
+
+.jr-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  font: 400 0.72rem var(--j-mono);
+  color: var(--j-muted);
+}
+
+.jr-ref {
+  padding: 2px 8px;
+  border-radius: 7px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.jr-ref--b {
+  color: var(--j-blue);
+  border-color: color-mix(in srgb, var(--j-blue) 45%, transparent);
+  background: color-mix(in srgb, var(--j-blue) 10%, transparent);
+}
+.jr-ref--v {
+  color: var(--j-violet);
+  border-color: color-mix(in srgb, var(--j-violet) 45%, transparent);
+  background: color-mix(in srgb, var(--j-violet) 10%, transparent);
+}
+.jr-ref--g {
+  color: var(--j-muted);
+  border-color: var(--j-line);
+  background: var(--j-chip);
+}
+.jr-ref--live {
+  color: var(--j-green);
+  border-color: color-mix(in srgb, var(--j-green) 45%, transparent);
+  background: color-mix(in srgb, var(--j-green) 10%, transparent);
+}
+
+.jr-name {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--j-ink);
+}
+
+.jr-org {
+  display: block;
+  color: var(--j-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.jr-date {
+  display: block;
+  margin-top: 4px;
+  font: 400 0.75rem var(--j-mono);
+  color: var(--j-muted);
+}
+
+.jr-chev {
+  width: 30px;
+  height: 30px;
+  margin-top: -2px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--j-chip);
+  color: var(--j-ink);
+  transition: transform 0.25s, background 0.2s;
+}
+
+.jr-chev svg { width: 14px; height: 14px; }
+
+.jr-hd[aria-expanded='true'] .jr-chev {
+  transform: rotate(180deg);
+  background: linear-gradient(135deg, var(--j-blue), var(--j-violet));
+  color: #fff;
+}
+
+/* ---------- tags ---------- */
+.jr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 20px 18px;
+}
+
+.jr-chips span {
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--j-chip);
+  padding: 4px 10px;
+  border-radius: 8px;
+  color: var(--j-ink);
+}
+
+/* ---------- expandable details ---------- */
+.jr-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.jr-more.is-open { grid-template-rows: 1fr; }
+.jr-more > div { overflow: hidden; }
+
+.jr-body {
+  margin: 0 20px;
+  padding: 16px 0 20px;
+  border-top: 1px dashed var(--j-line);
+}
+
+.jr-body p {
+  margin: 0 0 12px;
+  color: var(--j-muted);
+  font-weight: 500;
+}
+
+.jr-body ul {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  font: 400 0.85rem/1.6 var(--j-mono);
+  color: var(--j-ink);
+}
+
+.jr-body li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 4px;
+}
+
+.jr-body li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--j-green);
+}
+
+.jr-body .jr-chips { padding: 0; }
+
+/* ---------- background animation (clipped inside section) ---------- */
+.jr-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  clip-path: inset(0);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+
+.jr-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--j-blue) 12%, transparent) 1px,
+    transparent 1.4px
+  );
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+}
+
+.jr-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.16;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.jr-b1 {
+  width: 420px; height: 420px; left: -60px; top: 0;
+  background: var(--j-blue);
+  animation: jr-drift1 18s ease-in-out infinite alternate;
+}
+.jr-b2 {
+  width: 380px; height: 380px; right: -40px; top: 28%;
+  background: var(--j-violet);
+  animation: jr-drift2 22s ease-in-out infinite alternate;
+}
+.jr-b3 {
+  width: 320px; height: 320px; left: 30%; bottom: 0;
+  background: var(--j-blue);
+  opacity: 0.12;
+  animation: jr-drift3 26s ease-in-out infinite alternate;
+}
+
+@keyframes jr-drift1 { to { transform: translate(160px, 120px) scale(1.15); } }
+@keyframes jr-drift2 { to { transform: translate(-140px, -90px) scale(0.9); } }
+@keyframes jr-drift3 { to { transform: translate(120px, -80px) scale(1.2); } }
+
+.jr-glyph {
+  position: absolute;
+  font: 500 1.1rem var(--j-mono);
+  color: var(--j-blue);
+  opacity: 0.18;
+  pointer-events: none;
+  animation: jr-float 9s ease-in-out infinite alternate;
+}
+
+.jr-gl1 { left: 8%; top: 22%; }
+.jr-gl2 { right: 10%; top: 16%; animation-delay: -3s; color: var(--j-violet); }
+.jr-gl3 { left: 5%; top: 68%; animation-delay: -5s; color: var(--j-violet); }
+.jr-gl4 { right: 7%; top: 72%; animation-delay: -7s; }
+.jr-gl5 { left: 48%; top: 8%; animation-delay: -2s; }
+
+@keyframes jr-float {
+  from { transform: translateY(0) rotate(-4deg); }
+  to { transform: translateY(-26px) rotate(5deg); }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 560px) {
+  .journey {
+    --x0: 11px;
+    --x1: 33px;
+    --x2: 55px;
+    --gw: 72px;
+    padding: 64px 16px 80px;
+  }
+  .jr-hd { padding: 16px 14px 12px; }
+  .jr-chips { padding: 0 14px 16px; }
+  .jr-body { margin: 0 14px; }
+  .jr-blob { opacity: 0.12; }
+  .jr-glyph { font-size: 0.9rem; }
+  .jr-gl1, .jr-gl3 { left: 2%; }
+  .jr-gl2, .jr-gl4 { right: 3%; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .journey *,
+  .journey *::before,
+  .journey *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   গ্রাফিক সাইটের বাইরে যাওয়া আটকাতে
+   (সেকশনকে বাকি সেকশনের মতো একই মাপে রাখা)
+========================================= */
+
+.journey {
+  width: calc(100% - 40px);
+  max-width: 1210px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+/* ব্যাকগ্রাউন্ড অ্যানিমেশন কিনারায় ধীরে ধীরে মিলিয়ে যাবে,
+   তাই কোনো কড়া কাটা দাগ দেখা যাবে না */
+.jr-fx {
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 75% at 50% 50%,
+    #000 35%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 75% at 50% 50%,
+    #000 35%,
+    transparent 100%
+  );
+}
+
+/* ব্লবগুলো সেকশনের ভেতরে থাকবে */
+.jr-b1 {
+  left: 0;
+}
+
+.jr-b2 {
+  right: 0;
+}
+
+@media (max-width: 560px) {
+  .journey {
+    width: calc(100% - 24px);
+    border-radius: 20px;
+  }
+}
+
+/* =========================================
+   পুরো Education সেকশন উপরে তোলা
+========================================= */
+
+.journey {
+  padding-top: 24px;       /* আগে ছিল 72px, আরও উপরে চাইলে 0 করো */
+  margin-top: -20px;       /* যতটা উপরে চাও ততটা বাড়াও/কমাও */
+}
+
+.jr-title {
+  margin-bottom: 18px;
+}
+
+.jr-bar {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 560px) {
+  .journey {
+    padding-top: 16px;
+    margin-top: -40px;
+  }
+}
+
+/* =========================================
+   PROFESSIONAL HEADING + TERMINAL BAR
+========================================= */
+
+/* ---------- ছোট লেবেল (03 / MY JOURNEY) ---------- */
+
+.jr-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+  color: #64748b;
+  font: 600 0.7rem var(--j-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.jr-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #92a9e1;
+  box-shadow: 0 0 0 4px rgba(146, 169, 225, 0.18);
+}
+
+.jr-label::after {
+  content: "";
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, #cbd5e1, transparent);
+}
+
+/* ---------- মূল হেডিং ---------- */
+
+.jr-title {
+  position: relative;
+
+  margin: 0 0 26px;
+  padding-bottom: 16px;
+
+  color: #1e293b;
+  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.jr-title em {
+  background: linear-gradient(90deg, #92a9e1, #718bcb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* হেডিংয়ের নিচে ছোট অ্যাকসেন্ট লাইন */
+.jr-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 48px;
+  height: 4px;
+  border-radius: 4px;
+
+  background: linear-gradient(90deg, #92a9e1, #718bcb);
+}
+
+/* ---------- টার্মিনাল বার ---------- */
+
+.jr-term {
+  position: relative;
+
+  padding: 10px 18px 10px 72px;
+
+  color: #cbd5e1;
+  font: 500 0.78rem var(--j-mono);
+  letter-spacing: 0.01em;
+
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+
+  box-shadow:
+    0 10px 24px -12px rgba(15, 23, 42, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* উইন্ডোর তিনটা বিন্দু (লাল, হলুদ, সবুজ) */
+.jr-term::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+
+  background: #ff5f57;
+  box-shadow:
+    15px 0 0 #febc2e,
+    30px 0 0 #28c840;
+
+  transform: translateY(-50%);
+}
+
+.jr-term b {
+  color: #92a9e1;
+  font-weight: 600;
+}
+
+/* জ্বলে-নেভা কার্সর */
+.jr-term::after {
+  content: "";
+  display: inline-block;
+
+  width: 7px;
+  height: 14px;
+  margin-left: 6px;
+
+  vertical-align: -2px;
+  background: #92a9e1;
+  border-radius: 1px;
+
+  animation: jr-cursor 1.1s steps(1) infinite;
+}
+
+@keyframes jr-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- মোবাইল ---------- */
+
+@media (max-width: 560px) {
+  .jr-label {
+    font-size: 0.64rem;
+  }
+
+  .jr-term {
+    padding: 9px 14px 9px 62px;
+    font-size: 0.72rem;
+  }
+
+  .jr-term::before {
+    left: 14px;
+  }
+}
+
+/* =========================================
+   ইউনিভার্সিটির নাম + আইকন
+========================================= */
+
+.jr-uni {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 6px;
+
+  color: #5f78b8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.jr-uni-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(146, 169, 225, 0.4);
+  border-radius: 7px;
+
+  background: #eef2fb;
+  color: #718bcb;
+}
+
+.jr-uni-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.jr-uni + .jr-org {
+  margin-top: 3px;
+}
+
+@media (max-width: 560px) {
+  .jr-uni {
+    font-size: 0.76rem;
+  }
+}

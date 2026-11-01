@@ -1,5 +1,4 @@
-
-import "../styles/Hero.css";
+import "./Hero.css";
 
 function Hero() {
   return (
@@ -39,7 +38,6 @@ function Hero() {
 
       {/* RIGHT VISUAL SECTION */}
       <div className="visual">
-
         {/* GRAPHICAL ANIMATION BACKGROUND */}
         <div className="graphic-bg">
           {/* Animated Cube */}

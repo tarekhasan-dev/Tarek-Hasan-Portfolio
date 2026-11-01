@@ -18,7 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import "../styles/Skills.css";
+import "./Skills.css";
 
 /* ================================
    SKILLS DATA
@@ -194,15 +194,11 @@ function Skills() {
 
   return (
     <section className="skills-section" id="skills">
-
       <div className="skills-container">
-
         {/* HEADER */}
 
         <div className="skills-header">
-
           <div className="skills-heading-card">
-
             {/* ANIMATED GLOW EFFECTS */}
 
             <div className="skills-glow skills-glow-one" />
@@ -229,12 +225,11 @@ function Skills() {
             {/* HEADING CONTENT */}
 
             <div className="skills-heading-content">
-
-             <div className="skills-eyebrow">
-  <span className="skills-status-dot" />
-  02 / MY TOOLKIT
-  <span className="skills-brown-dot" />
-</div>
+              <div className="skills-eyebrow">
+                <span className="skills-status-dot" />
+                02 / MY TOOLKIT
+                <span className="skills-brown-dot" />
+              </div>
 
               <h2 className="skills-main-heading">
                 <span className="skills-title-black">
@@ -249,17 +244,13 @@ function Skills() {
                 Tools and technologies I use while learning
                 and building practical real-world projects.
               </p>
-
             </div>
-
           </div>
 
           {/* FILTER AND SEARCH */}
 
           <div className="skills-controls">
-
             <div className="skills-categories">
-
               {categories.map((category) => (
                 <button
                   key={category.id}
@@ -276,13 +267,11 @@ function Skills() {
                   {category.label}
                 </button>
               ))}
-
             </div>
 
             {/* SEARCH */}
 
             <div className="skills-search">
-
               <Search size={16} />
 
               <input
@@ -305,19 +294,14 @@ function Skills() {
                   <X size={15} />
                 </button>
               )}
-
             </div>
-
           </div>
-
         </div>
 
         {/* SKILLS GRID */}
 
         {filteredSkills.length === 0 ? (
-
           <div className="skills-empty">
-
             <Sparkles
               size={32}
               className="skills-empty-icon"
@@ -334,13 +318,9 @@ function Skills() {
             >
               Reset Filters
             </button>
-
           </div>
-
         ) : (
-
           <div className="skills-grid">
-
             {filteredSkills.map((skill, index) => {
               const Icon = skill.icon;
 
@@ -355,9 +335,7 @@ function Skills() {
                   className="skill-card"
                   aria-label={`View ${skill.name} details`}
                 >
-
                   <div className="skill-card-left">
-
                     <span className="skill-number">
                       {skill.num}
                     </span>
@@ -367,40 +345,31 @@ function Skills() {
                     </div>
 
                     <div className="skill-info">
-
                       <h3>{skill.name}</h3>
 
                       <span className="skill-category">
                         {skill.category}
                       </span>
-
                     </div>
-
                   </div>
 
                   <div className="skill-arrow">
                     <ArrowUpRight size={17} />
                   </div>
-
                 </button>
               );
             })}
-
           </div>
-
         )}
-
       </div>
 
       {/* SKILL DETAILS MODAL */}
 
       {selectedSkill && (
-
         <div
           className="skill-modal-overlay"
           onClick={() => setSelectedSkill(null)}
         >
-
           <div
             className="skill-modal"
             role="dialog"
@@ -408,7 +377,6 @@ function Skills() {
             aria-labelledby="skill-modal-title"
             onClick={(event) => event.stopPropagation()}
           >
-
             {/* CLOSE BUTTON */}
 
             <button
@@ -423,18 +391,14 @@ function Skills() {
             {/* MODAL HEADER */}
 
             <div className="skill-modal-header">
-
               <div className="skill-modal-icon">
-
                 {(() => {
                   const Icon = selectedSkill.icon;
                   return <Icon size={28} />;
                 })()}
-
               </div>
 
               <div>
-
                 <span className="skill-modal-meta">
                   {selectedSkill.num} / {selectedSkill.category}
                 </span>
@@ -442,9 +406,7 @@ function Skills() {
                 <h3 id="skill-modal-title">
                   {selectedSkill.name}
                 </h3>
-
               </div>
-
             </div>
 
             {/* DESCRIPTION */}
@@ -456,34 +418,27 @@ function Skills() {
             {/* PROFICIENCY */}
 
             <div className="skill-proficiency">
-
               <div className="skill-proficiency-heading">
-
                 <span>Skill Proficiency</span>
 
                 <span className="skill-proficiency-value">
                   {selectedSkill.level}%
                 </span>
-
               </div>
 
               <div className="skill-progress-track">
-
                 <div
                   className="skill-progress-fill"
                   style={{
                     width: `${selectedSkill.level}%`,
                   }}
                 />
-
               </div>
-
             </div>
 
             {/* SKILL TAGS */}
 
             <div className="skill-tags">
-
               {selectedSkill.tags.map((tag) => (
                 <span
                   key={tag}
@@ -493,15 +448,10 @@ function Skills() {
                   {tag}
                 </span>
               ))}
-
             </div>
-
           </div>
-
         </div>
-
       )}
-
     </section>
   );
 }

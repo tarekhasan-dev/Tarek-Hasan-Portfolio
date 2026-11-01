@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -15,7 +16,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import "../styles/Navbar.css";
+import "./Navbar.css";
 
 // ========================================
 // BRAND ICONS (inline SVG, no library needed)
@@ -55,7 +56,6 @@ function LinkedinIcon({ size = 18 }) {
 
 const CONTACT_EMAIL = "hasantareksh@gmail.com";
 
-// EmailJS: https://dashboard.emailjs.com থেকে এই তিনটা বসাও
 const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
@@ -214,7 +214,7 @@ function Navbar() {
     };
   }, [modalOpen]);
 
-  // Copy-বাটনের টাইমার পরিষ্কার
+  // Copy button timer cleanup
   useEffect(() => () => clearTimeout(copyTimerRef.current), []);
 
   // ========================================
@@ -274,7 +274,7 @@ function Navbar() {
     copyTimerRef.current = setTimeout(() => setCopied(false), 2000);
   };
 
-  // Tab চাপলে ফোকাস popup-এর ভেতরেই ঘুরবে
+  // Tab focus stays inside the dialog
   const handleDialogKeyDown = (event) => {
     if (event.key !== "Tab") return;
 
@@ -621,9 +621,7 @@ function Navbar() {
 
   return (
     <>
-      {/* ========================================
-          NAVBAR
-      ======================================== */}
+      {/* NAVBAR */}
 
       <header className="navbar-header">
         <nav
@@ -723,7 +721,7 @@ function Navbar() {
         </div>
       </header>
 
-      {/* CONTACT POPUP (body-তে portal) */}
+      {/* CONTACT POPUP */}
 
       {modalOpen && createPortal(contactModal, document.body)}
     </>

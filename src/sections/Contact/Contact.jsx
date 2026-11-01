@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 import {
@@ -8,7 +9,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-import "../styles/Contact.css";
+import "./Contact.css";
 
 // ========================================
 // BRAND ICONS (inline SVG, no library needed)
@@ -128,7 +129,9 @@ function Contact() {
 
           <div className="contact-info">
             <div className="contact-info-heading">
-              <span className="contact-small-label">CONTACT INFORMATION</span>
+              <span className="contact-small-label">
+                CONTACT INFORMATION
+              </span>
 
               <h3>
                 Let&apos;s start a
@@ -145,8 +148,13 @@ function Contact() {
 
             <div className="contact-details">
               {contactDetails.map((item) => (
-                <div className="contact-detail-card" key={item.label}>
-                  <div className="contact-detail-icon">{item.icon}</div>
+                <div
+                  className="contact-detail-card"
+                  key={item.label}
+                >
+                  <div className="contact-detail-icon">
+                    {item.icon}
+                  </div>
 
                   <div className="contact-detail-text">
                     <span>{item.label}</span>
@@ -180,7 +188,7 @@ function Contact() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/tarek-hasan-dev"
+                  href="https://www.linkedin.com/in/tarekhasan-dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -213,16 +221,24 @@ function Contact() {
                   delivery is not configured yet.
                 </p>
 
-                <button type="button" onClick={() => setSubmitted(false)}>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                >
                   Send Another Message
                 </button>
               </div>
             ) : (
               /* CONTACT FORM */
 
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+              >
                 <div className="contact-input-group">
-                  <label htmlFor="contact-name">YOUR NAME</label>
+                  <label htmlFor="contact-name">
+                    YOUR NAME
+                  </label>
 
                   <input
                     id="contact-name"
@@ -236,7 +252,9 @@ function Contact() {
                 </div>
 
                 <div className="contact-input-group">
-                  <label htmlFor="contact-email">EMAIL ADDRESS</label>
+                  <label htmlFor="contact-email">
+                    EMAIL ADDRESS
+                  </label>
 
                   <input
                     id="contact-email"
@@ -250,7 +268,9 @@ function Contact() {
                 </div>
 
                 <div className="contact-input-group">
-                  <label htmlFor="contact-message">YOUR MESSAGE</label>
+                  <label htmlFor="contact-message">
+                    YOUR MESSAGE
+                  </label>
 
                   <textarea
                     id="contact-message"
@@ -263,7 +283,10 @@ function Contact() {
                   />
                 </div>
 
-                <button className="contact-submit-button" type="submit">
+                <button
+                  className="contact-submit-button"
+                  type="submit"
+                >
                   <span>Send Message</span>
                   <Send size={17} />
                 </button>

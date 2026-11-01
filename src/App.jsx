@@ -1,9 +1,3 @@
-import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Skills from "./sections/Skills";
-import Contact from "./sections/Contact";
-
 import { useEffect, useRef } from "react";
 
 import {
@@ -14,8 +8,34 @@ import {
   useLocation,
 } from "react-router-dom";
 
+// ==================================
+// COMPONENTS
+// ==================================
+
+import Navbar from "./components/Navbar/Navbar";
+
+// ==================================
+// SECTIONS
+// ==================================
+
+import Hero from "./sections/Hero/Hero";
+import About from "./sections/About/About";
+import Skills from "./sections/Skills/Skills";
+import Education from "./sections/Education/Education";
+import Contact from "./sections/Contact/Contact";
+
+// ==================================
+// PAGES
+// ==================================
+
 import ProjectDetails from "./pages/ProjectDetails";
-import "./App.css";
+
+// ==================================
+// GLOBAL STYLES
+// ==================================
+
+import "./styles/App.css";
+import "./styles/ProjectCards.css";
 
 // ==================================
 // PROJECT DATA
@@ -71,9 +91,9 @@ function ScrollToTop() {
 
   useEffect(() => {
     if (hash) {
-      const id = hash.slice(1);
-
       const timer = setTimeout(() => {
+        const id = hash.slice(1);
+
         document.getElementById(id)?.scrollIntoView({
           behavior: "smooth",
         });
@@ -673,68 +693,8 @@ function HomePage() {
         {/* SKILLS */}
         <Skills />
 
-        {/* EXPERIENCE */}
-        <section
-          className="section experience-section"
-          id="experience"
-        >
-          <div className="section-heading">
-            <p className="eyebrow">03 / MY JOURNEY</p>
-
-            <h2>
-              Education &amp; <span>experience.</span>
-            </h2>
-          </div>
-
-          <div className="timeline">
-            <article className="timeline-item">
-              <span className="timeline-number">01</span>
-
-              <div>
-                <p className="timeline-type">EDUCATION</p>
-                <h3>Bachelor of Business Administration</h3>
-                <p>Management · Second-year student</p>
-              </div>
-
-              <span className="timeline-date">PRESENT</span>
-            </article>
-
-            <article className="timeline-item">
-              <span className="timeline-number">02</span>
-
-              <div>
-                <p className="timeline-type">
-                  PROFESSIONAL EXPERIENCE
-                </p>
-
-                <h3>SEO Specialist</h3>
-
-                <p>
-                  Experience in search engine optimization and improving
-                  website visibility.
-                </p>
-              </div>
-
-              <span className="timeline-date">3 YEARS</span>
-            </article>
-
-            <article className="timeline-item">
-              <span className="timeline-number">03</span>
-
-              <div>
-                <p className="timeline-type">CURRENT FOCUS</p>
-                <h3>Frontend Web Development</h3>
-
-                <p>
-                  Learning JavaScript, React, and modern web development
-                  through practical projects.
-                </p>
-              </div>
-
-              <span className="timeline-date">ONGOING</span>
-            </article>
-          </div>
-        </section>
+        {/* EDUCATION & EXPERIENCE */}
+        <Education />
 
         {/* PROJECTS */}
         <section

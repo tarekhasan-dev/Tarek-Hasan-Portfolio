@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 
 import {
@@ -701,25 +702,26 @@ function HomePage() {
           className="section projects-section"
           id="projects"
         >
-          <div className="section-heading">
-            <p className="eyebrow">04 / SELECTED WORK</p>
+          <div className="pr-inner">
+            <div className="section-heading">
+              <p className="eyebrow">04 / SELECTED WORK</p>
 
-            <h2>
-              Things I&apos;ve <span>built.</span>
-            </h2>
-          </div>
+              <h2>Projects From My Playground.</h2>
+            </div>
 
-          <p className="section-intro">
-            A selection of projects from my development journey.
-          </p>
+            <p className="section-intro">
+              A collection of ideas, experiments, and projects I've
+              brought to life through code, curiosity, and creativity.
+            </p>
 
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <ProjectCard
-                project={project}
-                key={project.number}
-              />
-            ))}
+            <div className="projects-grid">
+              {projects.map((project) => (
+                <ProjectCard
+                  project={project}
+                  key={project.number}
+                />
+              ))}
+            </div>
           </div>
         </section>
 

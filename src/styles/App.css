@@ -3001,3 +3001,14 @@ img {
   }
 }
 
+/* Reduce Projects heading and description size */
+#projects .section-heading h2 {
+  font-size: 40px !important;
+  line-height: 1.2 !important;
+}
+
+#projects .section-intro {
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  max-width: 550px;
+}

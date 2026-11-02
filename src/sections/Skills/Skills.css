@@ -1022,7 +1022,8 @@
    (সব সময় ফাইলের শেষে রাখো)
 ================================ */
 
-/* Tablet / small laptop: header card দুটো উপর-নিচে */
+/* ---------- Tablet / বড় মোবাইল (≤ 900px) ----------
+   Header card দুটো উপর-নিচে, skill card দুই কলামে (কম্প্যাক্ট) */
 @media (max-width: 900px) {
   .skills-header {
     flex-direction: column;
@@ -1041,29 +1042,84 @@
 
   .skills-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .skills-section {
-    padding: 12px 20px 50px;
+    gap: 12px;
   }
 
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
-
+  /* কার্ড কম্প্যাক্ট: লেখার জন্য বেশি জায়গা */
   .skill-card {
-    padding: 18px;
+    gap: 8px;
+    padding: 16px 14px;
+    border-radius: 16px;
   }
 
   .skill-card-left {
-    gap: 13px;
+    flex: 1 1 auto;
+    gap: 10px;
   }
 
+  /* জায়গা বাঁচাতে নম্বর লুকানো */
+  .skill-number {
+    display: none;
+  }
+
+  .skill-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .skill-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skill-info {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* নাম কেটে না গিয়ে ভেঙে নিচের লাইনে যাবে */
   .skill-info h3 {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .skill-category {
+    margin-top: 4px;
+    font-size: 9px;
+    letter-spacing: 0.6px;
+  }
+
+  .skill-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+  }
+
+  .skill-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ছোট জায়গায় ডেকোরেশন লেখার উপর ভিড় করে, তাই ছোট/বন্ধ */
+  .skill-card::after {
+    top: -30px;
+    right: -26px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .skill-card-left::before {
+    display: none;
+  }
+}
+
+/* ---------- মোবাইল (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .skills-section {
+    padding: 12px 20px 50px;
   }
 
   .skill-modal {
@@ -1071,6 +1127,7 @@
   }
 }
 
+/* ---------- ছোট মোবাইল (≤ 640px): এক কলাম ---------- */
 @media (max-width: 640px) {
   .skills-heading-card {
     min-height: 160px;
@@ -1085,16 +1142,80 @@
   .skills-heading-description {
     font-size: 12px;
   }
+
+  /* এক কলামে কার্ড চওড়া, তাই নম্বর আবার দেখানো যায় */
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .skill-card {
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
+  .skill-card-left {
+    gap: 13px;
+  }
+
+  .skill-number {
+    display: block;
+    font-size: 11px;
+  }
+
+  .skill-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .skill-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .skill-info h3 {
+    font-size: 16px;
+  }
+
+  .skill-category {
+    font-size: 10px;
+  }
+
+  .skill-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+
+  .skill-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
 }
 
+/* ---------- খুব ছোট মোবাইল (≤ 420px) ---------- */
 @media (max-width: 420px) {
   .skills-section {
     padding: 8px 14px 40px;
   }
 
+  .skills-container {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
   .skills-category-btn {
     padding: 8px 10px;
     font-size: 11px;
+  }
+
+  .skill-card {
+    padding: 14px 14px;
+  }
+
+  .skill-card-left {
+    gap: 10px;
   }
 
   .skill-number {
@@ -1106,9 +1227,13 @@
     height: 40px;
   }
 
+  .skill-info h3 {
+    font-size: 15px;
+  }
+
   .skill-arrow {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -1138,6 +1263,229 @@
 
   .skills-heading-card:hover,
   .skills-controls:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   MOBILE FIX: কার্ডের লেখা ভাঙা/কাটা বন্ধ
+   (ফাইলের একদম শেষে থাকবে)
+========================================================= */
+
+/* ---------- ৬৪১px – ৯০০px: দুই কলাম, কার্ড উপর-নিচ ---------- */
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .skill-card {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 16px;
+  }
+
+  /* আইকন উপরে, নাম নিচে */
+  .skill-card-left {
+    flex: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .skill-number {
+    display: none;
+  }
+
+  .skill-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .skill-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .skill-info {
+    width: 100%;
+  }
+
+  /* শব্দ মাঝখানে ভাঙবে না, শুধু শব্দের মাঝে স্পেস থাকলে নিচের লাইনে যাবে */
+  .skill-info h3 {
+    font-size: 16px;
+    line-height: 1.3;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .skill-category {
+    margin-top: 5px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* তীর কার্ডের উপরের ডান কোণে */
+  .skill-arrow {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .skill-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* ---------- ৬৪০px বা কম: এক কলাম, কার্ড আগের মতো পাশাপাশি ---------- */
+@media (max-width: 640px) {
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .skill-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
+  .skill-card-left {
+    flex: 1 1 auto;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .skill-number {
+    display: block;
+    font-size: 11px;
+  }
+
+  .skill-info {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .skill-info h3 {
+    font-size: 16px;
+  }
+
+  /* তীর আবার স্বাভাবিক জায়গায় */
+  .skill-arrow {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+}
+
+/* ---------- খুব ছোট ফোন (৪২০px বা কম) ---------- */
+@media (max-width: 420px) {
+  .skill-card {
+    padding: 14px;
+  }
+
+  .skill-card-left {
+    gap: 10px;
+  }
+
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skill-info h3 {
+    font-size: 15px;
+  }
+
+  .skill-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}
+/* =========================================================
+   PERFORMANCE FIX: স্ক্রল স্মুথ করা
+   (ফাইলের একদম শেষে থাকবে)
+========================================================= */
+
+/* ১. কার্ডে ভারী blur বন্ধ (সবচেয়ে বড় কারণ) */
+.skill-card,
+.skills-empty {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: #ffffff;
+}
+
+/* ২. যে কার্ড স্ক্রিনে নেই সেগুলো ব্রাউজার আঁকবেই না */
+.skill-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 96px;
+  contain: layout paint;
+}
+
+/* ৩. ছোট স্ক্রিনে: সব অসীম অ্যানিমেশন ও blur বন্ধ */
+@media (max-width: 900px) {
+  .skills-heading-card,
+  .skills-controls {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #ffffff;
+  }
+
+  .skill-card::after,
+  .skill-card-left::before,
+  .skill-arrow,
+  .skills-glow,
+  .skills-floating-particles span,
+  .skills-controls::before,
+  .skills-controls::after,
+  .skills-version,
+  .skills-status-dot,
+  .skills-brown-dot,
+  .skills-category-btn.active,
+  .skills-empty-icon {
+    animation: none !important;
+  }
+
+  /* ব্লবের blur বন্ধ, সাধারণ রঙের গোল হয়ে থাকবে */
+  .skill-card::after,
+  .skills-glow,
+  .skills-controls::before {
+    filter: none;
+  }
+
+  /* কার্ড ঢোকার অ্যানিমেশন বন্ধ */
+  .skill-card {
+    animation: none;
+  }
+}
+
+/* ৪. hover ইফেক্ট শুধু মাউস আছে এমন ডিভাইসে (ফোনে আটকে থাকবে না) */
+@media (hover: none) {
+  .skill-card:hover,
+  .skills-heading-card:hover,
+  .skills-controls:hover {
+    transform: none;
+  }
+
+  .skill-card:hover .skill-icon {
+    animation: none;
     transform: none;
   }
 }

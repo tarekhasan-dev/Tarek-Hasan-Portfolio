@@ -1,5 +1,4 @@
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   BrowserRouter,
@@ -8,6 +7,14 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+
+import {
+  FaCodeBranch,
+  FaChartLine,
+  FaDumbbell,
+  FaLayerGroup,
+  FaCalendarAlt,
+} from "react-icons/fa";
 
 // ==================================
 // COMPONENTS
@@ -23,7 +30,7 @@ import Hero from "./sections/Hero/Hero";
 import About from "./sections/About/About";
 import Skills from "./sections/Skills/Skills";
 import Education from "./sections/Education/Education";
-import Contact from "./sections/Contact/Contact";
+import Footer from "./sections/Footer/Footer";
 
 // ==================================
 // PAGES
@@ -37,6 +44,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 
 import "./styles/App.css";
 import "./styles/ProjectCards.css";
+import "./sections/projects/Projects.css";
 
 // ==================================
 // PROJECT DATA
@@ -47,6 +55,7 @@ const projects = [
     number: "01",
     title: "BazarDor",
     category: "Price Tracking Platform",
+    type: "platform",
     description:
       "A data-driven platform for monitoring and comparing essential commodity prices across Bangladesh.",
     tech: ["Next.js", "React", "Tailwind CSS"],
@@ -56,6 +65,7 @@ const projects = [
     number: "02",
     title: "FitLog",
     category: "Fitness Application",
+    type: "web",
     description:
       "A web application designed to make fitness tracking easier and more organized.",
     tech: ["React", "JavaScript", "API"],
@@ -65,6 +75,7 @@ const projects = [
     number: "03",
     title: "Dev Stack Builder",
     category: "Web Application",
+    type: "web",
     description:
       "A responsive web project built to explore modern frontend development.",
     tech: ["React", "JavaScript", "CSS"],
@@ -74,6 +85,7 @@ const projects = [
     number: "04",
     title: "DEVCONF 2026",
     category: "Developer Conference Website",
+    type: "event",
     description:
       "A conference website showcasing event information, speakers, pricing, and contact details.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -83,32 +95,74 @@ const projects = [
   },
 ];
 
+const projectIcons = {
+  "01": <FaChartLine />,
+  "02": <FaDumbbell />,
+  "03": <FaLayerGroup />,
+  "04": <FaCalendarAlt />,
+};
+
+// ==================================
+// SCROLL HANDLING ON ROUTE CHANGE
+// ==================================
+
 // ==================================
 // SCROLL HANDLING ON ROUTE CHANGE
 // ==================================
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    // প্রথমবার পেজ লোড হওয়ার সময় URL-এ hash থাকলে
+    // hash সরিয়ে Home section থেকে শুরু করবে।
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      if (hash) {
+        window.history.replaceState(
+          null,
+          "",
+          pathname + window.location.search
+        );
+      }
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
+
+      return;
+    }
+
+    // পরবর্তীতে Navbar বা Footer-এর কোনো section link-এ
+    // ক্লিক করলে সেই section-এ নিয়ে যাবে।
     if (hash) {
       const timer = setTimeout(() => {
         const id = hash.slice(1);
+        const element = document.getElementById(id);
 
-        document.getElementById(id)?.scrollIntoView({
+        element?.scrollIntoView({
           behavior: "smooth",
+          block: "start",
         });
       }, 0);
 
       return () => clearTimeout(timer);
     }
 
-    window.scrollTo(0, 0);
+    // অন্য route-এ গেলে একদম উপরে নিয়ে যাবে।
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
   }, [pathname, hash]);
 
   return null;
 }
-
 // ==================================
 // ANIMATED PROJECT PREVIEW
 // ==================================
@@ -168,10 +222,7 @@ function AnimatedProjectPreview({ number }) {
       ctx.clearRect(0, 0, width, height);
 
       const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        width,
-        height
+        0, 0, width, height
       );
 
       gradient.addColorStop(0, "#064e3b");
@@ -224,10 +275,7 @@ function AnimatedProjectPreview({ number }) {
       ctx.clearRect(0, 0, width, height);
 
       const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        width,
-        height
+        0, 0, width, height
       );
 
       gradient.addColorStop(0, "#312e81");
@@ -681,6 +729,52 @@ function ProjectCard({ project }) {
 // ==================================
 
 function HomePage() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [hovered, setHovered] = useState(null);
+  const [rowVisible, setRowVisible] = useState(false);
+  const rowRef = useRef(null);
+
+  useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRowVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const filters = [
+    { id: "all", label: "All Projects" },
+    { id: "web", label: "Web Apps" },
+    { id: "platform", label: "Platforms" },
+    { id: "event", label: "Events" },
+  ];
+
+  const filteredProjects =
+    activeFilter === "all"
+      ? projects
+      : projects.filter(
+          (project) => project.type === activeFilter
+        );
+
+  const getCount = (filterId) => {
+    if (filterId === "all") return projects.length;
+
+    return projects.filter(
+      (project) => project.type === filterId
+    ).length;
+  };
+
   return (
     <>
       <Navbar />
@@ -688,13 +782,8 @@ function HomePage() {
       <Hero />
 
       <main>
-        {/* ABOUT */}
         <About />
-
-        {/* SKILLS */}
         <Skills />
-
-        {/* EDUCATION & EXPERIENCE */}
         <Education />
 
         {/* PROJECTS */}
@@ -703,48 +792,107 @@ function HomePage() {
           id="projects"
         >
           <div className="pr-inner">
-            <div className="section-heading">
-              <p className="eyebrow">04 / SELECTED WORK</p>
 
-              <h2>Projects From My Playground.</h2>
+            {/* PROJECT HEADING + FILTER BAR */}
+            <div className="projects-topbar">
+              <div className="projects-heading">
+                <div className="section-heading">
+                  <p className="eyebrow">04 / SELECTED WORK</p>
+                  <h2>Projects From My Playground.</h2>
+                </div>
+
+                <p className="section-intro">
+                  A collection of ideas, experiments, and projects I've
+                  brought to life through code, curiosity, and creativity.
+                </p>
+              </div>
+
+              <div className="pth-filters projects-home-filters">
+                <div className="pth-path">
+                  <FaCodeBranch aria-hidden="true" />
+                  <span>~/projects</span>
+                </div>
+
+                {filters.map((filter) => (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    className={`pth-tab ${
+                      activeFilter === filter.id ? "active" : ""
+                    }`}
+                    onClick={() => setActiveFilter(filter.id)}
+                    aria-pressed={activeFilter === filter.id}
+                  >
+                    <span>{filter.label}</span>
+                    <span className="pth-count">
+                      {getCount(filter.id)}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <p className="section-intro">
-              A collection of ideas, experiments, and projects I've
-              brought to life through code, curiosity, and creativity.
-            </p>
+            {/* PROJECT ROW TIMELINE */}
+            <div
+              className={`prt${rowVisible ? " is-visible" : ""}`}
+              ref={rowRef}
+            >
+              <div
+                key={activeFilter}
+                className="prt-inner"
+                style={{ "--count": filteredProjects.length }}
+              >
+                <div className="prt-rail" aria-hidden="true">
+                  <span className="prt-track" />
 
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <ProjectCard
-                  project={project}
-                  key={project.number}
-                />
-              ))}
+                  <div className="prt-nodes">
+                    {filteredProjects.map((project, i) => (
+                      <span
+                        key={project.number}
+                        className={`prt-node${
+                          hovered === i ? " is-active" : ""
+                        }`}
+                        style={{ "--i": i }}
+                      >
+                        {projectIcons[project.number]}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="prt-row">
+                  {filteredProjects.map((project, i) => (
+                    <div
+                      className="prt-item"
+                      key={project.number}
+                      style={{ "--i": i }}
+                      onMouseEnter={() => setHovered(i)}
+                      onMouseLeave={() => setHovered(null)}
+                    >
+                      <div className="prt-step" aria-hidden="true">
+                        <span className="prt-node">
+                          {projectIcons[project.number]}
+                        </span>
+
+                        <span className="prt-step-label">
+                          PROJECT / {project.number}
+                        </span>
+
+                        <span className="prt-step-line" />
+                      </div>
+
+                      <ProjectCard project={project} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
+
           </div>
         </section>
-
-        {/* CONTACT */}
-        <Contact />
       </main>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <a href="#home" className="logo">
-          TH<span>.</span>
-        </a>
-
-        <p>Designed &amp; built with curiosity by Tarek Hasan.</p>
-
-        <a href="#home" className="back-to-top">
-          BACK TO TOP ↑
-        </a>
-
-        <span className="copyright">
-          © {new Date().getFullYear()} Tarek Hasan
-        </span>
-      </footer>
+      <Footer />
     </>
   );
 }

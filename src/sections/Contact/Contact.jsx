@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 import {
   Mail,
@@ -12,7 +12,7 @@ import {
 import "./Contact.css";
 
 // ========================================
-// BRAND ICONS (inline SVG, no library needed)
+// BRAND ICONS
 // ========================================
 
 function GithubIcon({ size = 20 }) {
@@ -43,6 +43,10 @@ function LinkedinIcon({ size = 20 }) {
   );
 }
 
+// ========================================
+// CONTACT COMPONENT
+// ========================================
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -51,6 +55,8 @@ function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,21 +65,51 @@ function Contact() {
       ...previous,
       [name]: value,
     }));
+
+    setError("");
   };
 
-  const handleSubmit = (event) => {
+  // ========================================
+  // EMAILJS FORM SUBMISSION
+  // ========================================
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Frontend-only submission.
-    // Connect EmailJS or a backend for actual email delivery.
+    setIsSending(true);
+    setError("");
+    setSubmitted(false);
 
-    setSubmitted(true);
+    try {
+      await emailjs.send(
+        "service_bnavcvp",
+        "template_48vwtgf",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        {
+          publicKey: "X4R2nBJIp1XzDxhQS",
+        }
+      );
 
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+      setSubmitted(true);
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+
+      setError(
+        "Message could not be sent. Please try again later."
+      );
+    } finally {
+      setIsSending(false);
+    }
   };
 
   // ========================================
@@ -96,12 +132,13 @@ function Contact() {
   ];
 
   // ========================================
-  // COMPONENT
+  // COMPONENT UI
   // ========================================
 
   return (
     <section className="contact-section" id="contact">
       <div className="contact-container">
+
         {/* SECTION HEADING */}
 
         <div className="contact-heading">
@@ -125,6 +162,7 @@ function Contact() {
         {/* CONTACT CONTENT */}
 
         <div className="contact-content">
+
           {/* LEFT SIDE */}
 
           <div className="contact-info">
@@ -217,8 +255,8 @@ function Contact() {
                 <h3>Thank you!</h3>
 
                 <p>
-                  Your message form was submitted successfully. Actual message
-                  delivery is not configured yet.
+                  Your message has been sent successfully.
+                  I&apos;ll get back to you soon.
                 </p>
 
                 <button
@@ -229,12 +267,13 @@ function Contact() {
                 </button>
               </div>
             ) : (
-              /* CONTACT FORM */
-
               <form
                 className="contact-form"
                 onSubmit={handleSubmit}
               >
+
+                {/* NAME INPUT */}
+
                 <div className="contact-input-group">
                   <label htmlFor="contact-name">
                     YOUR NAME
@@ -250,6 +289,8 @@ function Contact() {
                     required
                   />
                 </div>
+
+                {/* EMAIL INPUT */}
 
                 <div className="contact-input-group">
                   <label htmlFor="contact-email">
@@ -267,6 +308,8 @@ function Contact() {
                   />
                 </div>
 
+                {/* MESSAGE INPUT */}
+
                 <div className="contact-input-group">
                   <label htmlFor="contact-message">
                     YOUR MESSAGE
@@ -283,13 +326,28 @@ function Contact() {
                   />
                 </div>
 
+                {/* ERROR MESSAGE */}
+
+                {error && (
+                  <p role="alert" className="contact-error">
+                    {error}
+                  </p>
+                )}
+
+                {/* SUBMIT BUTTON */}
+
                 <button
                   className="contact-submit-button"
                   type="submit"
+                  disabled={isSending}
                 >
-                  <span>Send Message</span>
+                  <span>
+                    {isSending ? "Sending..." : "Send Message"}
+                  </span>
+
                   <Send size={17} />
                 </button>
+
               </form>
             )}
           </div>
@@ -302,6 +360,7 @@ function Contact() {
 
           <span>Designed with purpose. Built with passion.</span>
         </div>
+
       </div>
     </section>
   );

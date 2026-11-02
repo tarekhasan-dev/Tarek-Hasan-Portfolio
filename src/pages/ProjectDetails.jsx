@@ -1,4 +1,3 @@
-
 import { Link, useParams } from "react-router-dom";
 import {
   FaArrowLeft,
@@ -14,6 +13,8 @@ import {
   FaLayerGroup,
   FaMapMarkerAlt,
   FaReact,
+  FaTerminal,
+  FaCodeBranch,
 } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 
@@ -26,6 +27,7 @@ import "./ProjectDetails.css";
 const projectData = {
   "project-one": {
     number: "01",
+    filter: "web-apps",
     title: "BazarDor",
     category: "Price Tracking Platform",
 
@@ -70,6 +72,7 @@ const projectData = {
 
   "project-two": {
     number: "02",
+    filter: "web-apps",
     title: "FitLog",
     category: "Fitness & Wellness Application",
 
@@ -114,6 +117,7 @@ const projectData = {
 
   "project-three": {
     number: "03",
+    filter: "platforms",
     title: "Dev Stack Builder",
     category: "Web Application",
 
@@ -154,6 +158,7 @@ const projectData = {
 
   "project-four": {
     number: "04",
+    filter: "events",
     title: "DEVCONF 2026",
     category: "Developer Conference Website",
 
@@ -212,6 +217,56 @@ const highlightIcons = [
   <FaMapMarkerAlt />,
   <FaChartLine />,
 ];
+
+// =========================================
+// TOP HEADER: back button + filter bar
+// =========================================
+
+const filterTabs = [
+  { id: "all", label: "All Projects", to: "/#projects" },
+  { id: "web-apps", label: "Web Apps", to: "/projects/project-one" },
+  { id: "platforms", label: "Platforms", to: "/projects/project-three" },
+  { id: "events", label: "Events", to: "/projects/project-four" },
+];
+
+function ProjectsTopHeader({ activeFilter }) {
+  const allProjects = Object.values(projectData);
+
+  const countOf = (id) =>
+    id === "all"
+      ? allProjects.length
+      : allProjects.filter((item) => item.filter === id).length;
+
+  return (
+    <header className="pth-header">
+      <div className="pth-left">
+        <Link to="/#projects" className="pth-back">
+          <FaArrowLeft aria-hidden="true" />
+          <span>Back to Projects</span>
+        </Link>
+      </div>
+
+      <nav className="pth-filters" aria-label="Project categories">
+        <span className="pth-path" aria-hidden="true">
+          <FaCodeBranch />
+          ~/projects
+        </span>
+
+        {filterTabs.map((tab) => (
+          <Link
+            key={tab.id}
+            to={tab.to}
+            className={`pth-tab${activeFilter === tab.id ? " active" : ""}`}
+            aria-current={activeFilter === tab.id ? "page" : undefined}
+          >
+            <span>{tab.label}</span>
+            <span className="pth-count">{countOf(tab.id)}</span>
+          </Link>
+        ))}
+      </nav>
+    </header>
+  );
+}
 
 // =========================================
 // REAL PROJECT SCREENSHOT SHOWCASE
@@ -423,12 +478,9 @@ function DevconfShowcase({ project }) {
 function DevconfPage({ project }) {
   return (
     <main className="project-details devconf-details">
-      <div className="dc-head-wrap">
-        <Link to="/#projects" className="dc-back">
-          <FaArrowLeft aria-hidden="true" />
-          <span>Back to Projects</span>
-        </Link>
+      <ProjectsTopHeader activeFilter={project.filter} />
 
+      <div className="dc-head-wrap">
         <section className="dc-card">
           <div className="dc-badges">
             <span className="dc-badge dc-badge-violet">
@@ -612,10 +664,7 @@ function ProjectDetails() {
       <span className="pd-orb pd-orb-b" aria-hidden="true" />
 
       <div className="pd-inner">
-        <Link to="/#projects" className="pd-back">
-          <FaArrowLeft aria-hidden="true" />
-          <span>Back to Projects</span>
-        </Link>
+        <ProjectsTopHeader activeFilter={project.filter} />
 
         <section className="pd-card pd-head">
           <div className="pd-badges">

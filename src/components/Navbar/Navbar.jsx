@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -19,7 +18,7 @@ import emailjs from "@emailjs/browser";
 import "./Navbar.css";
 
 // ========================================
-// BRAND ICONS (inline SVG, no library needed)
+// BRAND ICONS
 // ========================================
 
 function GithubIcon({ size = 18 }) {
@@ -51,20 +50,20 @@ function LinkedinIcon({ size = 18 }) {
 }
 
 // ========================================
-// SETTINGS
+// EMAILJS SETTINGS
 // ========================================
 
 const CONTACT_EMAIL = "hasantareksh@gmail.com";
 
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_bnavcvp";
+const EMAILJS_TEMPLATE_ID = "template_48vwtgf";
+const EMAILJS_PUBLIC_KEY = "X4R2nBJIp1XzDxhQS";
 
-const EMAIL_READY = ![
-  EMAILJS_SERVICE_ID,
-  EMAILJS_TEMPLATE_ID,
-  EMAILJS_PUBLIC_KEY,
-].some((value) => value.startsWith("YOUR_"));
+const EMAIL_READY = Boolean(
+  EMAILJS_SERVICE_ID &&
+    EMAILJS_TEMPLATE_ID &&
+    EMAILJS_PUBLIC_KEY
+);
 
 const MAX_MESSAGE = 500;
 
@@ -91,6 +90,10 @@ const NAV_LINKS = [
   { name: "Projects", id: "projects" },
   { name: "Contact", id: "contact" },
 ];
+
+// ========================================
+// NAVBAR COMPONENT
+// ========================================
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -165,7 +168,7 @@ function Navbar() {
   }, []);
 
   // ========================================
-  // PILL: ACTIVE LINK + RESIZE + FONT LOAD
+  // PILL POSITION UPDATE
   // ========================================
 
   useEffect(() => {
@@ -178,7 +181,7 @@ function Navbar() {
   }, [activeLink]);
 
   // ========================================
-  // MODAL: ESCAPE KEY
+  // MODAL ESCAPE KEY
   // ========================================
 
   useEffect(() => {
@@ -196,7 +199,7 @@ function Navbar() {
   }, [modalOpen, sending]);
 
   // ========================================
-  // MODAL: BODY SCROLL LOCK + FOCUS
+  // MODAL BODY SCROLL + FOCUS
   // ========================================
 
   useEffect(() => {
@@ -214,8 +217,13 @@ function Navbar() {
     };
   }, [modalOpen]);
 
-  // Copy button timer cleanup
-  useEffect(() => () => clearTimeout(copyTimerRef.current), []);
+  // ========================================
+  // COPY TIMER CLEANUP
+  // ========================================
+
+  useEffect(() => {
+    return () => clearTimeout(copyTimerRef.current);
+  }, []);
 
   // ========================================
   // HANDLERS
@@ -236,6 +244,28 @@ function Navbar() {
     setModalOpen(true);
   };
 
+  // ========================================
+  // FOOTER CONTACT BUTTON EVENT
+  // ========================================
+
+  useEffect(() => {
+    const handleFooterContact = () => {
+      openContactModal();
+    };
+
+    window.addEventListener(
+      "open-contact-modal",
+      handleFooterContact
+    );
+
+    return () => {
+      window.removeEventListener(
+        "open-contact-modal",
+        handleFooterContact
+      );
+    };
+  }, []);
+
   const closeContactModal = () => {
     if (sending) return;
     setModalOpen(false);
@@ -244,13 +274,19 @@ function Navbar() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormData((previous) => ({ ...previous, [name]: value }));
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
 
     if (error) setError("");
   };
 
   const selectProjectType = (type) => {
-    setFormData((previous) => ({ ...previous, projectType: type }));
+    setFormData((previous) => ({
+      ...previous,
+      projectType: type,
+    }));
 
     if (error) setError("");
   };
@@ -263,6 +299,7 @@ function Navbar() {
       helper.value = CONTACT_EMAIL;
       helper.style.position = "fixed";
       helper.style.opacity = "0";
+
       document.body.appendChild(helper);
       helper.select();
       document.execCommand("copy");
@@ -271,10 +308,16 @@ function Navbar() {
 
     setCopied(true);
     clearTimeout(copyTimerRef.current);
-    copyTimerRef.current = setTimeout(() => setCopied(false), 2000);
+
+    copyTimerRef.current = setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
-  // Tab focus stays inside the dialog
+  // ========================================
+  // DIALOG KEYBOARD ACCESSIBILITY
+  // ========================================
+
   const handleDialogKeyDown = (event) => {
     if (event.key !== "Tab") return;
 
@@ -290,14 +333,17 @@ function Navbar() {
     if (event.shiftKey && document.activeElement === first) {
       event.preventDefault();
       last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
+    } else if (
+      !event.shiftKey &&
+      document.activeElement === last
+    ) {
       event.preventDefault();
       first.focus();
     }
   };
 
   // ========================================
-  // SEND MESSAGE WITH EMAILJS
+  // EMAILJS FORM SUBMISSION
   // ========================================
 
   const handleSubmit = async (event) => {
@@ -305,15 +351,15 @@ function Navbar() {
 
     if (sending) return;
 
-    if (!formData.projectType) {
-      setError("Please select a project type.");
-      return;
-    }
-
     if (!EMAIL_READY) {
       setError(
         `The contact form isn't connected yet. Please email me directly at ${CONTACT_EMAIL}.`
       );
+      return;
+    }
+
+    if (!formData.projectType) {
+      setError("Please select a project type.");
       return;
     }
 
@@ -332,13 +378,15 @@ function Navbar() {
           message: formData.message,
           to_email: CONTACT_EMAIL,
         },
-        EMAILJS_PUBLIC_KEY
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+        }
       );
 
       setSubmitted(true);
       setFormData(INITIAL_FORM);
     } catch (err) {
-      console.error("Email sending failed:", err);
+      console.error("EmailJS sending failed:", err);
 
       setError(
         `Message could not be sent. Please try again or email me at ${CONTACT_EMAIL}.`
@@ -351,7 +399,7 @@ function Navbar() {
   const remaining = MAX_MESSAGE - formData.message.length;
 
   // ========================================
-  // CONTACT POPUP
+  // CONTACT MODAL
   // ========================================
 
   const contactModal = (
@@ -383,18 +431,20 @@ function Navbar() {
           <X size={18} />
         </button>
 
-        {/* LEFT: INFORMATION */}
+        {/* LEFT SIDE */}
 
         <aside className="contact-modal-aside">
-          <span className="contact-modal-eyebrow">LET&apos;S CONNECT</span>
+          <span className="contact-modal-eyebrow">
+            LET&apos;S CONNECT
+          </span>
 
           <h2 id="contact-modal-title">
             Let&apos;s Talk About Your Project.
           </h2>
 
           <p>
-            Have an idea or a project in mind? I&apos;d love to hear about
-            it. Send me a message.
+            Have an idea or a project in mind? I&apos;d love to hear
+            about it. Send me a message.
           </p>
 
           <div className="contact-modal-availability contact-modal-hide-sm">
@@ -426,7 +476,9 @@ function Navbar() {
 
               <button
                 type="button"
-                className={`contact-modal-copy ${copied ? "is-copied" : ""}`}
+                className={`contact-modal-copy ${
+                  copied ? "is-copied" : ""
+                }`}
                 onClick={copyEmail}
                 aria-label={copied ? "Email copied" : "Copy email address"}
                 title={copied ? "Copied!" : "Copy email"}
@@ -450,7 +502,7 @@ function Navbar() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/tarek-hasan-dev"
+                href="https://www.linkedin.com/in/tarekhasan-dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -461,11 +513,14 @@ function Navbar() {
           </div>
         </aside>
 
-        {/* RIGHT: FORM / SUCCESS */}
+        {/* RIGHT SIDE: FORM / SUCCESS */}
 
         <div className="contact-modal-main">
           {!submitted ? (
-            <form className="contact-modal-form" onSubmit={handleSubmit}>
+            <form
+              className="contact-modal-form"
+              onSubmit={handleSubmit}
+            >
               {/* NAME + EMAIL */}
 
               <div className="contact-modal-row">
@@ -510,7 +565,10 @@ function Navbar() {
               {/* PROJECT TYPE */}
 
               <div className="contact-modal-field">
-                <span className="contact-modal-label" id="modal-type-label">
+                <span
+                  className="contact-modal-label"
+                  id="modal-type-label"
+                >
                   <Layers size={14} />
                   PROJECT TYPE
                 </span>
@@ -585,7 +643,10 @@ function Navbar() {
                 type="submit"
                 disabled={sending}
               >
-                <span>{sending ? "Sending..." : "Send Message"}</span>
+                <span>
+                  {sending ? "Sending..." : "Send Message"}
+                </span>
+
                 <Send size={16} />
               </button>
 
@@ -601,8 +662,8 @@ function Navbar() {
               <h3>Message Sent Successfully!</h3>
 
               <p>
-                Thank you for reaching out. I&apos;ll get back to you within
-                24 hours.
+                Thank you for reaching out. I&apos;ll get back to you
+                within 24 hours.
               </p>
 
               <button
@@ -619,14 +680,18 @@ function Navbar() {
     </div>
   );
 
+  // ========================================
+  // NAVBAR UI
+  // ========================================
+
   return (
     <>
-      {/* NAVBAR */}
-
       <header className="navbar-header">
         <nav
           id="navbar"
-          className={`nav-container ${scrolled ? "nav-scrolled" : ""}`}
+          className={`nav-container ${
+            scrolled ? "nav-scrolled" : ""
+          }`}
         >
           {/* LOGO */}
 
@@ -655,7 +720,9 @@ function Navbar() {
                 className={`nav-link ${
                   activeLink === link.id ? "active" : ""
                 }`}
-                onMouseEnter={(event) => positionPill(event.currentTarget)}
+                onMouseEnter={(event) =>
+                  positionPill(event.currentTarget)
+                }
                 onClick={() => handleNavigation(link.id)}
               >
                 {link.name}
@@ -678,8 +745,12 @@ function Navbar() {
             {/* MOBILE MENU BUTTON */}
 
             <button
-              className={`mobile-menu-btn ${menuOpen ? "menu-open" : ""}`}
-              onClick={() => setMenuOpen((previous) => !previous)}
+              className={`mobile-menu-btn ${
+                menuOpen ? "menu-open" : ""
+              }`}
+              onClick={() =>
+                setMenuOpen((previous) => !previous)
+              }
               type="button"
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
@@ -694,7 +765,9 @@ function Navbar() {
         {/* MOBILE DROPDOWN */}
 
         <div
-          className={`mobile-menu ${menuOpen ? "mobile-menu-open" : ""}`}
+          className={`mobile-menu ${
+            menuOpen ? "mobile-menu-open" : ""
+          }`}
         >
           {NAV_LINKS.map((link) => (
             <a

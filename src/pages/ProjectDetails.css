@@ -2117,3 +2117,49 @@ main.pd-page .pd-block p,
     max-width: 100%;
   }
 }
+
+/* =========================================
+   MOBILE FIX: PROJECT DETAILS TOP SPACING
+========================================= */
+
+@media (max-width: 700px) {
+  main.pd-page {
+    padding: 105px 16px 55px !important;
+  }
+
+  main.pd-page .pd-inner {
+    gap: 20px;
+  }
+
+  .pth-header {
+    width: 100%;
+    gap: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+  }
+
+  .pth-header .pth-left {
+    width: 100%;
+  }
+
+  .pth-header .pth-filters {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 5px;
+    padding: 7px;
+    border-radius: 16px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .pth-header .pth-filters a.pth-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+}

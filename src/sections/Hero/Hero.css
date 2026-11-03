@@ -549,10 +549,16 @@
 }
 
 .tag.a {
+  position: absolute;
+  z-index: 6;
+
   right: 0;
   top: 46%;
 
   border-left: 4px solid var(--hero-accent);
+
+  animation: webDevelopmentFloat 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 .tag.b {
@@ -1088,5 +1094,33 @@
   .tag.b {
     font-size: 13px;
     padding: 8px 12px;
+  }
+}
+
+/* =========================================
+   WEB DEVELOPMENT CARD FLOATING ANIMATION
+========================================= */
+
+.visual .tag.a {
+  animation: webDevelopmentFloat 5s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+@keyframes webDevelopmentFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .visual .tag.a {
+    animation: none !important;
+    will-change: auto;
   }
 }

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "./Education.css";
 
@@ -8,6 +7,8 @@ const FILTERS = [
   { key: "exp", label: "Experience" },
   { key: "focus", label: "Focus" },
 ];
+
+const PEEK_TAGS = 3;
 
 const svgProps = {
   viewBox: "0 0 24 24",
@@ -171,7 +172,9 @@ const GLYPHS = [
 
 export default function Education() {
   const [filter, setFilter] = useState("all");
-  const [open, setOpen] = useState({ focus: true });
+
+  // every card starts closed
+  const [open, setOpen] = useState({});
 
   const toggle = (id) =>
     setOpen((o) => ({ ...o, [id]: !o[id] }));
@@ -233,6 +236,8 @@ export default function Education() {
             const dim =
               filter !== "all" && filter !== item.type;
 
+            const hiddenTags = item.tags.length - PEEK_TAGS;
+
             return (
               <li
                 key={item.id}
@@ -248,13 +253,16 @@ export default function Education() {
                   </i>
                 </div>
 
-                <article className="jr-card">
+                {/* tap anywhere on the card to open / close */}
+                <article
+                  className={`jr-card${isOpen ? " is-open" : ""}`}
+                  onClick={() => toggle(item.id)}
+                >
                   <button
                     type="button"
                     className="jr-hd"
                     aria-expanded={isOpen}
                     aria-controls={`jr-more-${item.id}`}
-                    onClick={() => toggle(item.id)}
                   >
                     <span>
                       <span className="jr-meta">
@@ -308,17 +316,26 @@ export default function Education() {
                     </span>
                   </button>
 
+                  {/* closed: only the first few tags */}
                   {!isOpen && (
                     <div className="jr-chips jr-peek">
-                      {item.tags.map((t) => (
+                      {item.tags.slice(0, PEEK_TAGS).map((t) => (
                         <span key={t}>{t}</span>
                       ))}
+
+                      {hiddenTags > 0 && (
+                        <span className="jr-chip-more">
+                          +{hiddenTags}
+                        </span>
+                      )}
                     </div>
                   )}
 
+                  {/* open: tapping inside the details does not close the card */}
                   <div
                     className={`jr-more${isOpen ? " is-open" : ""}`}
                     id={`jr-more-${item.id}`}
+                    onClick={(event) => event.stopPropagation()}
                   >
                     <div>
                       <div className="jr-body">

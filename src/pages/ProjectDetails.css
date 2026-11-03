@@ -1878,3 +1878,242 @@ main.project-details.devconf-details {
   padding: 9px 16px;
   border-radius: 14px;
 }
+
+/* =========================================================
+   MOBILE FIX: project details cards
+   (keep this at the very end of the file)
+========================================================= */
+
+/* title: stop the g / y from being clipped by the gradient text */
+main.pd-page .pd-head h1 {
+  padding-bottom: 0.1em;
+  line-height: 1.12;
+}
+
+/* "3 Screenshots" pill + heading: visible on the light page */
+.project-image-showcase-header h2 {
+  color: #0f172a;
+}
+
+.project-image-count {
+  border-color: #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+/* ---------- tablet and below ---------- */
+@media (max-width: 900px) {
+  main.pd-page .pd-head h1 {
+    margin: 0;
+    font-size: clamp(2rem, 8.5vw, 3rem);
+  }
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 700px) {
+  /* filter bar: compact, scrolls sideways if needed */
+  .pth-header {
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .pth-header .pth-filters {
+    align-self: stretch;
+    width: 100%;
+    padding: 6px 8px;
+    gap: 4px;
+    border-radius: 14px;
+  }
+
+  .pth-header .pth-filters a.pth-tab {
+    padding: 7px 11px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  /* header card */
+  main.pd-page .pd-head {
+    gap: 14px;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  main.pd-page .pd-head::before {
+    width: 110px;
+    height: 110px;
+  }
+
+  main.pd-page .pd-badges {
+    gap: 6px;
+    padding-bottom: 12px;
+  }
+
+  main.pd-page .pd-badge {
+    padding: 4px 9px;
+    font-size: 10px;
+  }
+
+  main.pd-page .pd-head-grid {
+    gap: 14px;
+  }
+
+  main.pd-page .pd-lede {
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  main.pd-page .pd-pills li {
+    font-size: 10.5px;
+    white-space: normal;
+  }
+
+  main.pd-page .pd-actions {
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  main.pd-page .pd-btn {
+    width: 100%;
+    min-height: 42px;
+  }
+
+  /* screenshot card */
+  .project-image-showcase {
+    margin: 4px 0;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .project-image-showcase-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .project-image-showcase-header h2 {
+    font-size: 20px;
+  }
+
+  .project-image-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  /* info blocks */
+  main.pd-page .pd-grid {
+    gap: 14px;
+  }
+
+  main.pd-page .pd-block {
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+
+  main.pd-page .pd-block h2 {
+    font-size: 17px;
+  }
+
+  main.pd-page .pd-block p:last-child {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  main.pd-page .pd-chips {
+    gap: 6px;
+  }
+
+  /* lighter scrolling: no blur on phones */
+  main.pd-page .pd-card {
+    background: #ffffff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ---------- touch devices: no stuck hover lift ---------- */
+@media (hover: none) {
+  main.pd-page .pd-block:hover,
+  main.pd-page .pd-btn:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   FIX: content overflowing to the right on small screens
+   (keep this at the very end of the file)
+========================================================= */
+
+/* single grid columns must be allowed to shrink */
+main.pd-page .pd-inner,
+main.pd-page .pd-head,
+main.pd-page .pd-head-side,
+main.pd-page .pd-grid,
+.dc-head-wrap,
+.dc-card,
+.dc-side {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* every direct child may shrink below its content width */
+main.pd-page .pd-inner > *,
+main.pd-page .pd-head > *,
+main.pd-page .pd-head-grid > *,
+main.pd-page .pd-head-side > *,
+.dc-head-wrap > *,
+.dc-card > *,
+.dc-grid > *,
+.pth-header > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* long words and links must wrap instead of pushing the layout */
+main.pd-page .pd-head h1,
+main.pd-page .pd-lede,
+main.pd-page .pd-block p,
+.dc-head-wrap p {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  /* header badges wrap inside the card */
+  main.pd-page .pd-badge,
+  .dc-badge {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  /* buttons fit the card width */
+  main.pd-page .pd-btn,
+  .dc-head-wrap a.dc-btn {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* filter bar scrolls sideways inside itself, never pushes the page */
+  .pth-header {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .pth-header .pth-filters {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* screenshot card */
+  .project-image-showcase {
+    max-width: 100%;
+  }
+
+  .project-image-main img,
+  .project-image-item img {
+    max-width: 100%;
+  }
+}

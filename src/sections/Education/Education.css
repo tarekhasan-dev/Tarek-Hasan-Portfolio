@@ -779,3 +779,85 @@
     font-size: 0.76rem;
   }
 }
+
+/* =========================================
+   TAP TO EXPAND + COMPACT MOBILE CARDS
+   (keep this at the very end of the file)
+========================================= */
+
+/* whole card is tappable */
+.jr-card {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.jr-card:hover {
+  border-color: color-mix(in srgb, var(--j-blue) 45%, var(--j-line));
+}
+
+/* the opened details behave like normal text */
+.jr-more {
+  cursor: default;
+}
+
+/* header text may shrink instead of pushing the arrow out */
+.jr-hd {
+  grid-template-columns: minmax(0, 1fr) 30px;
+}
+
+/* "+4" chip shown on closed cards */
+.jr-chips .jr-chip-more {
+  border: 1px dashed color-mix(in srgb, var(--j-blue) 55%, transparent);
+  background: transparent;
+  color: var(--j-blue);
+  font-family: var(--j-mono);
+  font-weight: 600;
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 560px) {
+  .jr-row {
+    padding-bottom: 14px;
+  }
+
+  .jr-card {
+    border-radius: 18px;
+  }
+
+  .jr-meta {
+    gap: 6px;
+    font-size: 0.66rem;
+  }
+
+  .jr-ref {
+    padding: 1px 7px;
+  }
+
+  .jr-name {
+    margin-top: 5px;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .jr-org {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .jr-date {
+    font-size: 0.7rem;
+  }
+
+  .jr-chips {
+    gap: 5px;
+  }
+
+  .jr-chips span {
+    padding: 3px 8px;
+    font-size: 0.72rem;
+  }
+
+  .jr-body ul {
+    font-size: 0.78rem;
+  }
+}
